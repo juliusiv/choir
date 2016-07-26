@@ -30,5 +30,16 @@ generate new music based on different qualities of the aggregate data.
 
 ### Server Specifics
 
+Here's a link to the [design doc](https://docs.google.com/document/d/1eBGzf7_cMWRQMCNLnJ5nF65lVlKPaoOmGFziUi0kHbA/edit?usp=sharing).
+
 The server keeps track of two things: each client's data and an aggregate of all
 client data.
+
+
+### Synthesizer Specifics
+
+Here's a link to the [design doc](https://docs.google.com/document/d/1XgDZQiqny1M-P1JgaMXEWcYS4sVbwWF1VQUpQ0Jbknw/edit?usp=sharing).
+
+### Client Specifics
+
+Here's a link to the [design doc](https://docs.google.com/document/d/1MsDBHrfPUlvnMDBOp09t637r2mm7x4kaOHxvujnsl_I/edit?usp=sharing).
