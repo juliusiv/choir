@@ -9,10 +9,6 @@ var FREQUENCIES = {
   c6: 1046.50
 };
 
-function defaultFor(arg, val) {
-  return typeof arg !== "undefined" ? arg : val;
-}
-
 export default class Synthesizer {
   constructor() {
     this.AC = new (window.AudioContext || window.webkitAudioContext)();
@@ -41,9 +37,7 @@ export default class Synthesizer {
   }
 
   // Add a new oscillator to the Player.
-  addOscillator(freq) {
-    freq = defaultFor(freq, FREQUENCIES.c5);
-
+  addOscillator(freq = FREQUENCIES.c5) {
     var o = this.AC.createOscillator();
     o.frequency.value = freq;
     o.connect(this.masterGain);
