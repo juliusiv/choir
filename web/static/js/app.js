@@ -19,7 +19,7 @@ import "phoenix_html"
 // import socket from "./socket"
 import { Socket } from "phoenix";
 import { Recon } from "./recon"
-import synthesizer from "./synthesizer.js"
+import Synthesizer from "./synthesizer.js"
 
 
 var CLIENT_DATA = {
@@ -42,9 +42,11 @@ $(document).ready(function() {
   let socket = new Socket("/socket", {params: {token: token}});
   let channel = socket.channel("voices", {});
 
+  let synth = new Synthesizer();
+
   channel.on("voice_update", payload =>{
     aggDataSection.text(JSON.stringify(payload, null, 2));
-    synthesizer.setFrequency(523.25 + 50*payload.connections);
+    synth.setFrequency(523.25 + 50*payload.connections);
   });
 
   // Set the text for the client's browser.
@@ -81,11 +83,17 @@ $(document).ready(function() {
       .receive("ok", resp => { channel.push("connect", CLIENT_DATA) })
       .receive("error", resp => { console.log("Unable to join", resp) });
 
-    // Start playing sound.
-    synthesizer.addOscillator();
-    synthesizer.start();
-    console.log(synthesizer);
+    // Add an oscillator and start playing sound.
+    synth.addOscillator();
+    synth.start();
   }, function(error) {
     console.error("Failed!", error);
+  });
+
+  // When the sound control is clicked change its class so the icon on the
+  // button changes and toggle the synth's mute.
+  $("#sound-control").click(function() {
+    $("#sound-control>span").toggleClass("fa-volume-off fa-volume-up");
+    synth.mute();
   });
 });

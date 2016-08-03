@@ -1,3 +1,5 @@
+<button id="sound-control"><span class="fa fa-volume-off fa-lg"></span></button>
+
 <ul>
   <li id="browser">
     <span class="label">Browser: </span>
