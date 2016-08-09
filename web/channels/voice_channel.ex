@@ -18,8 +18,8 @@ defmodule Choir.VoiceChannel do
   def handle_in("connect", voice_data, socket) do
     Logger.debug "handle_in:connect"
 
-    Choir.VoiceMap.insert(socket, voice_data)
-    updated_voice_data = Choir.VoiceData.add_data(voice_data)
+    Choir.ClientTableServer.insert(socket, voice_data)
+    updated_voice_data = Choir.AggDataServer.add_data(voice_data)
 
     broadcast! socket, "voice_update", updated_voice_data
     {:noreply, socket}
@@ -32,7 +32,7 @@ defmodule Choir.VoiceChannel do
   def handle_in("voice_update", new_data, socket) do
     Logger.debug "handle_in:voice_update"
 
-    updated_voice_data = Choir.VoiceData.update_data(socket, new_data)
+    updated_voice_data = Choir.AggDataServer.update_data(socket, new_data)
     broadcast! socket, "voice_update", updated_voice_data
     {:noreply, socket}
   end
@@ -57,10 +57,10 @@ defmodule Choir.VoiceChannel do
   def terminate(_reason, socket) do
     Logger.debug "terminating connection"
 
-    case Choir.VoiceMap.lookup(socket) do
+    case Choir.ClientTableServer.lookup(socket) do
       {:ok, voice_data} ->
-        Choir.VoiceMap.delete(socket)
-        updated_voice_data = Choir.VoiceData.remove_data(voice_data)
+        Choir.ClientTableServer.delete(socket)
+        updated_voice_data = Choir.AggDataServer.remove_data(voice_data)
 
         broadcast! socket, "voice_update", updated_voice_data
         {:noreply, socket}  

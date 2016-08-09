@@ -21,8 +21,8 @@ defmodule Choir do
     opts = [strategy: :one_for_one, name: Choir.Supervisor]
     Supervisor.start_link(children, opts)
 
-    Choir.VoiceMap.start_link
-    Choir.VoiceData.start_link
+    Choir.ClientTableServer.start_link
+    Choir.AggDataServer.start_link
   end
 
   # Tell Phoenix to update the endpoint configuration

@@ -1,4 +1,4 @@
-defmodule Choir.VoiceMap do
+defmodule Choir.ClientTableServer do
   use GenServer
   # Store map of socket to data for the client.
 
@@ -10,7 +10,7 @@ defmodule Choir.VoiceMap do
   Starts the registry.
   """
   def start_link do
-    GenServer.start_link(__MODULE__, :voice_map, [name: :voice_map])
+    GenServer.start_link(__MODULE__, :client_table, [name: :client_table])
   end
 
   @doc """
@@ -20,7 +20,7 @@ defmodule Choir.VoiceMap do
   """
   def lookup(socket) do
     client_id = socket.assigns.client_id
-    case :ets.lookup(:voice_map, client_id) do
+    case :ets.lookup(:client_table, client_id) do
       [{^client_id, data}] -> {:ok, data}
       # [{^client_id, data}] -> {:ok, %{:blah => "whocares"}}
       [] -> :error
@@ -31,7 +31,7 @@ defmodule Choir.VoiceMap do
   Inserts the {`socket`, `data`} pair into the ETS table.
   """
   def insert(socket, data) do
-    :ets.insert(:voice_map, {socket.assigns.client_id, data})
+    :ets.insert(:client_table, {socket.assigns.client_id, data})
   end
 
   @doc """
@@ -43,7 +43,7 @@ defmodule Choir.VoiceMap do
   def delete(socket) do
     case lookup(socket) do
       {:ok, data} ->
-        :ets.delete(:voice_map, socket.assigns.client_id)
+        :ets.delete(:client_table, socket.assigns.client_id)
         {:ok, data}
       :error -> :error
     end

@@ -1,4 +1,4 @@
-defmodule Choir.VoiceData do
+defmodule Choir.AggDataServer do
   use GenServer
 
   # ============================================================================
@@ -45,10 +45,10 @@ defmodule Choir.VoiceData do
   # TODO: Maybe move all this work into the server callbacks so there aren't
   # multiple calls happening for one operation. More atomic, probably faster.
   def update_data(socket, new_data) do
-    old_data = Choir.VoiceMap.lookup(socket)
+    old_data = Choir.ClientTableServer.lookup(socket)
     remove_data(old_data)
     # `insert` will update existing data if the `socket` already exists.
-    Choir.VoiceMap.insert(socket, new_data)
+    Choir.ClientTableServer.insert(socket, new_data)
     add_data(new_data)
   end
 
