@@ -1,5 +1,55 @@
 defmodule Choir.Weathers do
-  defstruct tornado: 0, tropical_storm: 0, hurricane: 0, severe_thunderstorms: 0, thunderstorms: 0, mixed_rain_and_snow: 0, mixed_rain_and_sleet: 0, mixed_snow_and_sleet: 0, freezing_drizzle: 0, drizzle: 0, freezing_rain: 0, showers: 0, showers: 0, snow_flurries: 0, light_snow_showers: 0, blowing_snow: 0, snow: 0, hail: 0, sleet: 0, dust: 0, foggy: 0, haze: 0, smoky: 0, blustery: 0, windy: 0, cold: 0, cloudy: 0, mostly_cloudy_night: 0, mostly_cloudy_day: 0, partly_cloudy_night: 0, partly_cloudy_day: 0, clear_night: 0, sunny: 0, fair_night: 0, fair_day: 0, mixed_rain_and_hail: 0, hot: 0, isolated_thunderstorms: 0, scattered_thunderstorms: 0, scattered_thunderstorms: 0, scattered_showers: 0, heavy_snow: 0, scattered_snow_showers: 0, heavy_snow: 0, partly_cloudy: 0, thundershowers: 0, snow_showers: 0, isolated_thundershowers: 0, mostly_cloudy: 0
+  defstruct [
+    tornado: 0,
+    tropical_storm: 0,
+    hurricane: 0,
+    severe_thunderstorms: 0,
+    thunderstorms: 0,
+    mixed_rain_and_snow: 0,
+    mixed_rain_and_sleet: 0,
+    mixed_snow_and_sleet: 0,
+    freezing_drizzle: 0,
+    drizzle: 0,
+    freezing_rain: 0,
+    showers: 0,
+    showers: 0,
+    snow_flurries: 0,
+    light_snow_showers: 0,
+    blowing_snow: 0,
+    snow: 0,
+    hail: 0,
+    sleet: 0,
+    dust: 0,
+    foggy: 0,
+    haze: 0,
+    smoky: 0,
+    blustery: 0,
+    windy: 0,
+    cold: 0,
+    cloudy: 0,
+    mostly_cloudy_night: 0,
+    mostly_cloudy_day: 0,
+    partly_cloudy_night: 0,
+    partly_cloudy_day: 0,
+    clear_night: 0,
+    sunny: 0,
+    fair_night: 0,
+    fair_day: 0,
+    mixed_rain_and_hail: 0,
+    hot: 0,
+    isolated_thunderstorms: 0,
+    scattered_thunderstorms: 0,
+    scattered_thunderstorms: 0,
+    scattered_showers: 0,
+    heavy_snow: 0,
+    scattered_snow_showers: 0,
+    heavy_snow: 0,
+    partly_cloudy: 0,
+    thundershowers: 0,
+    snow_showers: 0,
+    isolated_thundershowers: 0,
+    mostly_cloudy: 0
+  ]
 
   @doc """
   Increments the field in the Weathers struct `old` that corresponds to the atom
@@ -55,6 +105,7 @@ defmodule Choir.Weathers do
       "snow showers" -> %{old | snow_showers: old.snow_showers+1}
       "isolated thundershowers" -> %{old | isolated_thundershowers: old.isolated_thundershowers+1}
       "mostly cloudy" -> %{old | mostly_cloudy: old.mostly_cloudy+1}
+      "clear" -> %{old | clear: old.clear+1}
     end
   end
 
@@ -112,6 +163,7 @@ defmodule Choir.Weathers do
       "snow showers" -> %{old | snow_showers: old.snow_showers-1}
       "isolated thundershowers" -> %{old | isolated_thundershowers: old.isolated_thundershowers-1}
       "mostly cloudy" -> %{old | mostly_cloudy: old.mostly_cloudy-1}
+      "clear" -> %{old | clear: old.clear-1}
     end
   end
 end

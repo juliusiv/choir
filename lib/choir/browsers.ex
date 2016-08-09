@@ -1,5 +1,14 @@
 defmodule Choir.Browsers do
-  defstruct opera: 0, firefox: 0, safari: 0, ie: 0, edge: 0, chrome: 0, blink: 0, unknown: 0
+  defstruct [
+    opera: 0,
+    firefox: 0,
+    safari: 0,
+    ie: 0,
+    edge: 0,
+    chrome: 0,
+    blink: 0,
+    unknown: 0
+  ]
 
 
   @doc """

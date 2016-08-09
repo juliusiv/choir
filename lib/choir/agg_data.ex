@@ -1,5 +1,11 @@
 defmodule Choir.AggData do
-  defstruct connections: 0, avg_temp: nil, browsers: %Choir.Browsers{}, weathers: %Choir.Weathers{}, avg_location: %Choir.Location{}
+  defstruct [
+    connections: 0,
+    avg_temp: nil,
+    browsers: %Choir.Browsers{},
+    weathers: %Choir.Weathers{},
+    avg_location: %Choir.Location{}
+  ]
 
   @doc """
   Add the data in `new_client_data` to the AggData struct `old`.
