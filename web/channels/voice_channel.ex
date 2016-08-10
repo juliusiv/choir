@@ -15,11 +15,12 @@ defmodule Choir.VoiceChannel do
   the aggregate data. Then send a broadcast out to all clients with the new
   aggregate data.
   """
-  def handle_in("connect", voice_data, socket) do
+  def handle_in("connect", client_map, socket) do
     Logger.debug "handle_in:connect"
+    client_data = Choir.ClientData.new(client_map)
 
-    Choir.ClientTableServer.insert(socket, voice_data)
-    updated_voice_data = Choir.AggDataServer.add_data(voice_data)
+    Choir.ClientTableServer.insert(socket, client_data)
+    updated_voice_data = Choir.AggDataServer.add_data(client_data)
 
     broadcast! socket, "voice_update", updated_voice_data
     {:noreply, socket}
@@ -29,8 +30,9 @@ defmodule Choir.VoiceChannel do
   When a client's data changes update their data in the ETS map and update the
   aggregate data.
   """
-  def handle_in("voice_update", new_data, socket) do
+  def handle_in("voice_update", new_map, socket) do
     Logger.debug "handle_in:voice_update"
+    new_data = Choir.ClientData.new(new_map)
 
     updated_voice_data = Choir.AggDataServer.update_data(socket, new_data)
     broadcast! socket, "voice_update", updated_voice_data
@@ -58,9 +60,9 @@ defmodule Choir.VoiceChannel do
     Logger.debug "terminating connection"
 
     case Choir.ClientTableServer.lookup(socket) do
-      {:ok, voice_data} ->
+      {:ok, client_data} ->
         Choir.ClientTableServer.delete(socket)
-        updated_voice_data = Choir.AggDataServer.remove_data(voice_data)
+        updated_voice_data = Choir.AggDataServer.remove_data(client_data)
 
         broadcast! socket, "voice_update", updated_voice_data
         {:noreply, socket}  

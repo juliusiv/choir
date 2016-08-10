@@ -13,6 +13,7 @@ defmodule Choir.AggData do
   Returns a new AggData struct.
   """
   def add_data(old, new_client_data) do
+    IO.inspect new_client_data
     add_connection(old)
       |> add_temp(new_client_data)
       |> add_browser(new_client_data)
@@ -58,9 +59,9 @@ defmodule Choir.AggData do
   def add_temp(old, new) do
     case old.avg_temp do
       nil ->
-        %{old | avg_temp: new["temp"]}
+        %{old | avg_temp: new.temp}
       old_avg ->
-        %{old | avg_temp: old_avg + (new["temp"] - old_avg)/old.connections}
+        %{old | avg_temp: old_avg + (new.temp - old_avg)/old.connections}
     end
   end
 
@@ -76,7 +77,7 @@ defmodule Choir.AggData do
   def remove_temp(old, new) do
     case old.connections do
       0 -> %{old | avg_temp: nil}
-      conns -> %{old | avg_temp: old.avg_temp - (new["temp"] + old.avg_temp)/conns}
+      conns -> %{old | avg_temp: old.avg_temp - (new.temp + old.avg_temp)/conns}
     end
   end
 
@@ -87,8 +88,7 @@ defmodule Choir.AggData do
   Returns a new AggData struct.
   """
   def add_browser(old, new) do
-    IO.inspect new
-    %{old | browsers: Choir.Browsers.add(old.browsers, new["browser"])}
+    %{old | browsers: Choir.Browsers.add(old.browsers, new.browser)}
   end
 
   @doc """
@@ -98,7 +98,7 @@ defmodule Choir.AggData do
   Returns a new AggData struct.
   """
   def remove_browser(old, client_data) do
-    %{old | browsers: Choir.Browsers.remove(old.browsers, client_data["browser"])}
+    %{old | browsers: Choir.Browsers.remove(old.browsers, client_data.browser)}
   end
 
   @doc """
@@ -108,7 +108,7 @@ defmodule Choir.AggData do
   Returns a new AggData struct.
   """
   def add_weather(old, new) do
-    %{old | weathers: Choir.Weathers.add(old.weathers, new["weather"])}
+    %{old | weathers: Choir.Weathers.add(old.weathers, new.weather)}
   end
   
   @doc """
@@ -118,7 +118,7 @@ defmodule Choir.AggData do
   Returns a new AggData struct.
   """
   def remove_weather(old, client_data) do
-    %{old | weathers: Choir.Weathers.remove(old.weathers, client_data["weather"])}
+    %{old | weathers: Choir.Weathers.remove(old.weathers, client_data.weather)}
   end
 
   @doc """
@@ -128,7 +128,7 @@ defmodule Choir.AggData do
   Returns a new AggData struct.
   """
   def add_location(old, new) do
-    new_loc = %Choir.Location{lat: new["latitude"], lon: new["longitude"]}
+    new_loc = %Choir.Location{lat: new.latitude, lon: new.longitude}
     %{old | avg_location: Choir.Location.add(old.avg_location, new_loc, old.connections)}
   end
 
@@ -139,7 +139,7 @@ defmodule Choir.AggData do
   Returns a new AggData struct.
   """
   def remove_location(old, client_data) do
-    loc = %Choir.Location{lat: client_data["latitude"], lon: client_data["longitude"]}
+    loc = %Choir.Location{lat: client_data.latitude, lon: client_data.longitude}
     %{old | avg_location: Choir.Location.remove(old.avg_location, loc, old.connections)}
   end
 end

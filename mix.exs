@@ -19,7 +19,7 @@ defmodule Choir.Mixfile do
   def application do
     [mod: {Choir, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :exconstructor]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,7 +38,8 @@ defmodule Choir.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:uuid, "~> 1.1"}]
+     {:uuid, "~> 1.1"},
+     {:exconstructor, "~> 1.0.2"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
