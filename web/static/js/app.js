@@ -23,8 +23,8 @@ import Synthesizer from "./synthesizer.js"
 
 
 var CLIENT_DATA = {
-  latitude: undefined,
-  longitude: undefined,
+  lat: undefined,
+  lon: undefined,
   temp: undefined,
   browser: undefined,
   weather: undefined
@@ -59,8 +59,8 @@ $(document).ready(function() {
   // Handle the location coordinates and send a request for the client's weather
   // temperature as a Promise.
   locationPromise.then(function(loc) {
-    CLIENT_DATA.latitude = loc.coords.latitude;
-    CLIENT_DATA.longitude = loc.coords.longitude;
+    CLIENT_DATA.lat = loc.coords.latitude;
+    CLIENT_DATA.lon = loc.coords.longitude;
 
     let latRounded = Math.round(loc.coords.latitude * 100)/100;
     let lonRounded = Math.round(loc.coords.longitude * 100)/100;

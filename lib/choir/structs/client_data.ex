@@ -1,7 +1,7 @@
 defmodule Choir.ClientData do
   defstruct [
-    latitude: nil,
-    longitude: nil,
+    lat: nil,
+    lon: nil,
     temp: nil,
     browser: nil,
     weather: nil
