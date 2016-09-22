@@ -36,7 +36,7 @@ defmodule Choir.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_choir_key",
-    signing_salt: "wi8edAL6"
+    signing_salt: "8c2zV1ky"
 
   plug Choir.Router
 end

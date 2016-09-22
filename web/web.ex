@@ -18,7 +18,6 @@ defmodule Choir.Web do
 
   def model do
     quote do
-      # Define common model functionality
     end
   end
 

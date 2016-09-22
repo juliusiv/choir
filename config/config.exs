@@ -8,7 +8,7 @@ use Mix.Config
 # Configures the endpoint
 config :choir, Choir.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "tG4H8BrUCG79tX1qY56A+pq6Ptg3UN7tBqRig+/zOBqQX0nEQDxSQSLXbyMnXyT+",
+  secret_key_base: "1ZZIa1OavpT7//d/ZiH9cL7woZsYT/7TehBG8/P1IVGG4mcI57aE45Wew3+xyMHz",
   render_errors: [view: Choir.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Choir.PubSub,
            adapter: Phoenix.PubSub.PG2]
