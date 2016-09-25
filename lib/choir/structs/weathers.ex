@@ -1,172 +1,44 @@
 defmodule Choir.Weathers do
-  defstruct [
-    blowing_snow: 0,
-    blustery: 0,
-    clear_night: 0,
-    cloudy: 0,
-    cold: 0,
-    drizzle: 0,
-    dust: 0,
-    fair_day: 0,
-    fair_night: 0,
-    foggy: 0,
-    freezing_drizzle: 0,
-    freezing_rain: 0,
-    hail: 0,
-    haze: 0,
-    heavy_snow: 0,
-    heavy_snow: 0,
-    hot: 0,
-    hurricane: 0,
-    isolated_thundershowers: 0,
-    isolated_thunderstorms: 0,
-    light_snow_showers: 0,
-    mixed_rain_and_hail: 0,
-    mixed_rain_and_sleet: 0,
-    mixed_rain_and_snow: 0,
-    mixed_snow_and_sleet: 0,
-    mostly_clear: 0,
-    mostly_cloudy: 0,
-    mostly_cloudy_day: 0,
-    mostly_cloudy_night: 0,
-    partly_cloudy: 0,
-    partly_cloudy_day: 0,
-    partly_cloudy_night: 0,
-    scattered_showers: 0,
-    scattered_snow_showers: 0,
-    scattered_thunderstorms: 0,
-    scattered_thunderstorms: 0,
-    severe_thunderstorms: 0,
-    showers: 0,
-    showers: 0,
-    sleet: 0,
-    smoky: 0,
-    snow: 0,
-    snow_flurries: 0,
-    snow_showers: 0,
-    sunny: 0,
-    thundershowers: 0,
-    thunderstorms: 0,
-    tornado: 0,
-    tropical_storm: 0,
-    windy: 0
-  ]
+  alias Choir.StrictMap, as: StrictMap
+
+  @moduledoc """
+  Provides some simple functions for interacting with a collection of Weathers.
+
+  Weathers is implemented as a map for now. This is mainly because the JS
+  clients use the Yahoo! Weather API which isn't good about only returning the
+  weather conditions that it says it will return; it periodically gives
+  unexpected values.
+  """
 
   @doc """
-  Increments the field in the Weathers struct `old` that corresponds to the atom
-  `new`.
-
-  Returns an updated Weathers struct.
+  The Yahoo! weather API says these are the values it will return so only these
+  will be accepted. Anything else we get will be "unknown".
   """
-  def add(old, new) do
-    case new do
-      "blowing snow" -> %{old | blowing_snow: old.blowing_snow+1}
-      "blustery" -> %{old | blustery: old.blustery+1}
-      "clear (night)" -> %{old | clear_night: old.clear_night+1}
-      "clear" -> %{old | clear: old.clear+1}
-      "cloudy" -> %{old | cloudy: old.cloudy+1}
-      "cold" -> %{old | cold: old.cold+1}
-      "drizzle" -> %{old | drizzle: old.drizzle+1}
-      "dust" -> %{old | dust: old.dust+1}
-      "fair (day)" -> %{old | fair_day: old.fair_day+1}
-      "fair (night)" -> %{old | fair_night: old.fair_night+1}
-      "foggy" -> %{old | foggy: old.foggy+1}
-      "freezing drizzle" -> %{old | freezing_drizzle: old.freezing_drizzle+1}
-      "freezing rain" -> %{old | freezing_rain: old.freezing_rain+1}
-      "hail" -> %{old | hail: old.hail+1}
-      "haze" -> %{old | haze: old.haze+1}
-      "heavy snow" -> %{old | heavy_snow: old.heavy_snow+1}
-      "hot" -> %{old | hot: old.hot+1}
-      "hurricane" -> %{old | hurricane: old.hurricane+1}
-      "isolated thundershowers" -> %{old | isolated_thundershowers: old.isolated_thundershowers+1}
-      "isolated thunderstorms" -> %{old | isolated_thunderstorms: old.isolated_thunderstorms+1}
-      "light snow showers" -> %{old | light_snow_showers: old.light_snow_showers+1}
-      "mixed rain and sleet" -> %{old | mixed_rain_and_sleet: old.mixed_rain_and_sleet+1}
-      "mixed rain and snow" -> %{old | mixed_rain_and_snow: old.mixed_rain_and_snow+1}
-      "mixed snow and sleet" -> %{old | mixed_snow_and_sleet: old.mixed_snow_and_sleet+1}
-      "mixed_rain_and_hail" -> %{old | mixed_rain_and_hail: old.mixed_rain_and_hail+1}
-      "mostly clear" -> %{old | mostly_clear: old.mostly_clear+1}
-      "mostly cloudy (day)" -> %{old | mostly_cloudy_day: old.mostly_cloudy_day+1}
-      "mostly cloudy (night)" -> %{old | mostly_cloudy_night: old.mostly_cloudy_night+1}
-      "mostly cloudy" -> %{old | mostly_cloudy: old.mostly_cloudy+1}
-      "partly cloudy (day)" -> %{old | partly_cloudy_day: old.partly_cloudy_day+1}
-      "partly cloudy (night)" -> %{old | partly_cloudy_night: old.partly_cloudy_night+1}
-      "partly cloudy" -> %{old | partly_cloudy: old.partly_cloudy+1}
-      "scattered showers" -> %{old | scattered_showers: old.scattered_showers+1}
-      "scattered snow showers" -> %{old | scattered_snow_showers: old.scattered_snow_showers+1}
-      "scattered thunderstorms" -> %{old | scattered_thunderstorms: old.scattered_thunderstorms+1}
-      "severe thunderstorms" -> %{old | severe_thunderstorms: old.severe_thunderstorms+1}
-      "showers" -> %{old | showers: old.showers+1}
-      "sleet" -> %{old | sleet: old.sleet+1}
-      "smoky" -> %{old | smoky: old.smoky+1}
-      "snow flurries" -> %{old | snow_flurries: old.snow_flurries+1}
-      "snow showers" -> %{old | snow_showers: old.snow_showers+1}
-      "snow" -> %{old | snow: old.snow+1}
-      "sunny" -> %{old | sunny: old.sunny+1}
-      "thundershowers" -> %{old | thundershowers: old.thundershowers+1}
-      "thunderstorms" -> %{old | thunderstorms: old.thunderstorms+1}
-      "tornado" -> %{old | tornado: old.tornado+1}
-      "tropical storm" -> %{old | tropical_storm: old.tropical_storm+1}
-      "windy" -> %{old | windy: old.windy+1}
-    end
+  @accepted_weathers MapSet.new(["tornado", "tropical storm", "hurricane",
+    "severe thunderstorms", "thunderstorms", "mixed rain and snow",
+    "mixed rain and sleet", "mixed snow and sleet", "freezing drizzle",
+    "drizzle", "freezing rain", "showers", "showers", "snow flurries",
+    "light snow showers", "blowing snow", "snow", "hail", "sleet", "dust",
+    "foggy", "haze", "smoky", "blustery", "windy", "cold", "cloudy",
+    "mostly cloudy (night)", "mostly cloudy (day)", "partly cloudy (night)",
+    "partly cloudy (day)", "clear (night)", "sunny", "fair (night)",
+    "fair (day)", "mixed rain and hail", "hot", "isolated thunderstorms",
+    "scattered thunderstorms", "scattered thunderstorms", "scattered showers",
+    "heavy snow", "scattered snow showers", "heavy snow", "partly cloudy",
+    "thundershowers", "snow showers", "isolated thundershowers", "unknown"
+  ])
+
+  def new(initial \\ %{}) do
+    StrictMap.new(@accepted_weathers, initial)
   end
 
-  @doc """
-  Decrements the field in the Weathers struct `old` that corresponds to the atom
-  `new`.
 
-  Returns an updated Weathers struct.
-  """
-  def remove(old, new) do
-    case new do
-      "blowing snow" -> %{old | blowing_snow: old.blowing_snow-1}
-      "blustery" -> %{old | blustery: old.blustery-1}
-      "clear (night)" -> %{old | clear_night: old.clear_night-1}
-      "clear" -> %{old | clear: old.clear-1}
-      "cloudy" -> %{old | cloudy: old.cloudy-1}
-      "cold" -> %{old | cold: old.cold-1}
-      "drizzle" -> %{old | drizzle: old.drizzle-1}
-      "dust" -> %{old | dust: old.dust-1}
-      "fair (day)" -> %{old | fair_day: old.fair_day-1}
-      "fair (night)" -> %{old | fair_night: old.fair_night-1}
-      "foggy" -> %{old | foggy: old.foggy-1}
-      "freezing drizzle" -> %{old | freezing_drizzle: old.freezing_drizzle-1}
-      "freezing rain" -> %{old | freezing_rain: old.freezing_rain-1}
-      "hail" -> %{old | hail: old.hail-1}
-      "haze" -> %{old | haze: old.haze-1}
-      "heavy snow" -> %{old | heavy_snow: old.heavy_snow-1}
-      "hot" -> %{old | hot: old.hot-1}
-      "hurricane" -> %{old | hurricane: old.hurricane-1}
-      "isolated thundershowers" -> %{old | isolated_thundershowers: old.isolated_thundershowers-1}
-      "isolated thunderstorms" -> %{old | isolated_thunderstorms: old.isolated_thunderstorms-1}
-      "light snow showers" -> %{old | light_snow_showers: old.light_snow_showers-1}
-      "mixed rain and sleet" -> %{old | mixed_rain_and_sleet: old.mixed_rain_and_sleet-1}
-      "mixed rain and snow" -> %{old | mixed_rain_and_snow: old.mixed_rain_and_snow-1}
-      "mixed snow and sleet" -> %{old | mixed_snow_and_sleet: old.mixed_snow_and_sleet-1}
-      "mixed_rain_and_hail" -> %{old | mixed_rain_and_hail: old.mixed_rain_and_hail-1}
-      "mostly clear" -> %{old | mostly_clear: old.mostly_clear+1}
-      "mostly cloudy (day)" -> %{old | mostly_cloudy_day: old.mostly_cloudy_day-1}
-      "mostly cloudy (night)" -> %{old | mostly_cloudy_night: old.mostly_cloudy_night-1}
-      "mostly cloudy" -> %{old | mostly_cloudy: old.mostly_cloudy-1}
-      "partly cloudy (day)" -> %{old | partly_cloudy_day: old.partly_cloudy_day-1}
-      "partly cloudy (night)" -> %{old | partly_cloudy_night: old.partly_cloudy_night-1}
-      "partly cloudy" -> %{old | partly_cloudy: old.partly_cloudy-1}
-      "scattered showers" -> %{old | scattered_showers: old.scattered_showers-1}
-      "scattered snow showers" -> %{old | scattered_snow_showers: old.scattered_snow_showers-1}
-      "scattered thunderstorms" -> %{old | scattered_thunderstorms: old.scattered_thunderstorms-1}
-      "severe thunderstorms" -> %{old | severe_thunderstorms: old.severe_thunderstorms-1}
-      "showers" -> %{old | showers: old.showers-1}
-      "sleet" -> %{old | sleet: old.sleet-1}
-      "smoky" -> %{old | smoky: old.smoky-1}
-      "snow flurries" -> %{old | snow_flurries: old.snow_flurries-1}
-      "snow showers" -> %{old | snow_showers: old.snow_showers-1}
-      "snow" -> %{old | snow: old.snow-1}
-      "sunny" -> %{old | sunny: old.sunny-1}
-      "thundershowers" -> %{old | thundershowers: old.thundershowers-1}
-      "thunderstorms" -> %{old | thunderstorms: old.thunderstorms-1}
-      "tornado" -> %{old | tornado: old.tornado-1}
-      "tropical storm" -> %{old | tropical_storm: old.tropical_storm-1}
-      "windy" -> %{old | windy: old.windy-1}
-    end
+  def add(old_map, to_add) do
+    StrictMap.add(old_map, to_add, @accepted_weathers)
+  end
+
+
+  def remove(old_map, to_remove) do
+    StrictMap.remove(old_map, to_remove, @accepted_weathers)
   end
 end

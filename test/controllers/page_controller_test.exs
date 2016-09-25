@@ -1,8 +1,6 @@
 defmodule Choir.PageControllerTest do
   use Choir.ConnCase
 
-  import Phoenix.View
-
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

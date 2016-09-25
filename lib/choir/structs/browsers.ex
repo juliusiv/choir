@@ -1,51 +1,26 @@
 defmodule Choir.Browsers do
-  defstruct [
-    opera: 0,
-    firefox: 0,
-    safari: 0,
-    ie: 0,
-    edge: 0,
-    chrome: 0,
-    blink: 0,
-    unknown: 0
-  ]
+  alias Choir.StrictMap, as: StrictMap
 
-
-  @doc """
-  Increments the field in the Browsers struct `old` that corresponds to the atom
-  `new`.
-
-  Returns an updated Browsers struct.
+  @moduledoc """
+  Provides some simple functions for interacting with a collection of browsers.
   """
-  def add(old, new) do
-    case new do
-      "opera" -> %{old | opera: old.opera+1}
-      "firefox" -> %{old | firefox: old.firefox+1}
-      "safari" -> %{old | safari: old.safari+1}
-      "ie" -> %{old | ie: old.ie+1}
-      "edge" -> %{old | edge: old.edge+1}
-      "chrome" -> %{old | chrome: old.chrome+1}
-      "blink" -> %{old | blink: old.blink+1}
-      "unknown" -> %{old | unknown: old.unknown+1}
-    end
+
+
+  @accepted_browsers MapSet.new(
+    ["opera", "firefox", "safari", "ie", "edge", "chrome", "blink", "unknown"])
+
+
+  def new(initial \\ %{}) do
+    StrictMap.new(@accepted_browsers, initial)
   end
 
-  @doc """
-  Decrements the field in the Browsers struct `old` that corresponds to the atom
-  `new`.
 
-  Returns an updated Browsers struct.
-  """
-  def remove(old, new) do
-    case new do
-      "opera" -> %{old | opera: old.opera-1}
-      "firefox" -> %{old | firefox: old.firefox-1}
-      "safari" -> %{old | safari: old.safari-1}
-      "ie" -> %{old | ie: old.ie-1}
-      "edge" -> %{old | edge: old.edge-1}
-      "chrome" -> %{old | chrome: old.chrome-1}
-      "blink" -> %{old | blink: old.blink-1}
-      "unknown" -> %{old | unknown: old.unknown-1}
-    end
+  def add(old_map, to_add) do
+    StrictMap.add(old_map, to_add, @accepted_browsers)
+  end
+
+
+  def remove(old_map, to_remove) do
+    StrictMap.remove(old_map, to_remove, @accepted_browsers)
   end
 end

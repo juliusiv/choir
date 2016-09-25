@@ -75,9 +75,6 @@ defmodule Choir.AggDataServer do
   def handle_call({:remove_data, data}, _from, voices) do
     updated_voices = Choir.AggData.remove_data(voices, data)
     {:reply, updated_voices, updated_voices}
-    # updated_voices = Map.update! voices, :connections, &(&1 - 1)
-    # {:reply, updated_voices, updated_voices}
-    # {:reply, voices, voices}
   end
 
   def handle_cast({:create, _voice}, voices) do
