@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <title>choir</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href='<%= static_path(@conn, "/css/app.css") %>'>
 
     <%= if @uuid do %>
       <%= tag :meta, name: "channel_token",
@@ -16,23 +16,19 @@
     <% end %>
   </head>
 
-  <body>
+  <body class="<%= @page %>">
     <div class="container">
       <header>
-        <h1>choir</h1>
+        <h1>Choir</h1>
       </header>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
-      <main role="main">
+      <div class="row content">
         <%= render @view_module, @view_template, assigns %>
-      </main>
+      </div>
     </div> <!-- /container -->
 
-    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
+    <script src='<%= static_path(@conn, "/js/app.js") %>'></script>
     <script src="https://use.fontawesome.com/1f0a879eb8.js"></script>
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
   </body>
 </html>

@@ -11,6 +11,7 @@ defmodule Choir.AggData do
     avg_location: %Location{}
   ]
 
+
   @doc """
   Add the data in `new_client_data` to the AggData struct `old`.
 
@@ -149,4 +150,6 @@ defmodule Choir.AggData do
                                           loc,
                                           old.connections)}
   end
+
+
 end

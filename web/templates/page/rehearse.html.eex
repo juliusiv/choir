@@ -1,0 +1,47 @@
+<h2>Rehearse</h2>
+
+<div class="columns">
+  <div id="weather-data" class="four columns">
+    <h5>Weather Types</h5>
+    <%= for {weather, _} <- Choir.Weathers.new do %>
+      <span class="row">
+        <%= weather %>: <input class="weather-input" type="number" name="weather" min="0" step="1" value="0">
+      </span>
+    <% end %>
+  </div>
+
+  <div id="browser-data" class="four columns">
+    <h5>Browser Types</h5>
+    <%= for {browser, _} <- Choir.Browsers.new do %>
+      <span class="row">
+        <%= browser %>: <input class="browser-input" type="number" name="browser" min="0" step="1" value="0">
+      </span>
+    <% end %>
+  </div>
+
+  <div id="connection-temp-location-data" class="four columns">
+    <div id="connections" class="row">
+      <h5>Connections</h5>
+      <span class="row">
+        <input class="connection-input" type="number" name="connections" min="0" step="1" value="0">
+      </span>
+    </div>
+
+    <div id="avg-temp" class="row">
+      <h5>Average Temperature</h5>
+      <span class="row">
+        <input class="temperature-input" type="number" name="avg-temp" min="-100" max="200" step="0.1" value="50">
+      </span>
+    </div>
+
+    <div id="avg-location">
+      <h5>Average Location</h5>
+      <span class="row">
+        Latitude: <input class="latitude-input" type="number" name="avg-lat" min="-90" max="90" step="0.0001" value="0.0">
+      </span>
+      <span class="row">
+        Longitude: <input class="longitude-input" type="number" name="avg-lon" min="-90" max="90" step="0.0001" value="0.0">
+      </span>
+    </div>
+  </div>
+</div>
