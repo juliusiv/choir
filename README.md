@@ -10,6 +10,19 @@ on the idea that everyone is different, comes from different places, and likes
 music. By taking advantage of everyone's diversity and the turnaround in
 connected users, Choir's music should be constantly changing.
 
+## Installation
+
+To run Choir, you need Elixir:
+
+`brew install elixir`
+
+Now that you have Elixir you need Hex, Elixir's package manager. Run `mix local.hex`
+and say yes to all of the prompts. Then run `mix deps.get` to get all of the Elixir
+dependencies for Choir. You also need all of the node dependencies; you can get those
+by running `npm install`. If you don't have Sass, install that too.
+
+Now you can start the server! Run `elixir phoenix.server` and you're good to go.
+
 ## Technical Stuff
 
 ### Quick System Design
