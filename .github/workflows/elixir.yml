@@ -24,6 +24,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Check formatting
+      run: mix format --check-formatted
     - name: Install Dependencies
       run: |
         mix local.rebar --force
