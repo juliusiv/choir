@@ -19,8 +19,15 @@ defmodule ChoirWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/login", ChoirWeb do
+    pipe_through :browser
+
+    get "/", PageController, :login
+    post "/", PageController, :log_in
+  end
+
   # Other scopes may use custom stacks.
-  # scope "/api", ChoirWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", ChoirWeb do
+    pipe_through :api
+  end
 end

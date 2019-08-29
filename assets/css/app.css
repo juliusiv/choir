@@ -1,3 +1,75 @@
-/* This file is for your main application css. */
+/* Reset all margins and paddings */
+* {
+    margin: 0px;
+    padding: 0px;
+}
+/* And make sure we're filling the page */
+html, body {
+    height: 100%;
+    font-size: 18px;
+}
 
-@import "./phoenix.css";
+/* Colors */
+.bg-gold { background-color: gold; }
+.bg-ivory { background-color: ivory; }
+.c-crimson { color: crimson; }
+.c-gold { color: gold; }
+
+/* Typography */
+.bold { font-weight: bold; }
+.serif { font-family: 'Lancelot', cursive; }
+.monospace { font-family: monospace; }
+.font-normal { font-size: 1rem; }
+.font-tiny { font-size: 0.8rem; }
+.font-large { font-size: 2rem; }
+.font-huge { font-size: 3rem; }
+
+/* Layout stuff */
+.block { display: block; }
+.height-all { height: 100%; }
+.absolute { position: absolute; }
+
+/* Margins and paddings */
+.m0 { margin: 0; }
+.ml0 { margin-left: 0; }
+.mr0 { margin-right: 0; }
+.mb0 { margin-bottom: 0; }
+.mt0 { margin-top: 0; }
+
+.m1 { margin: 0.5rem; }
+.ml1 { margin-left: 0.5rem; }
+.mr1 { margin-right: 0.5rem; }
+.mt1 { margin-top: 0.5rem; }
+
+.m2 { margin: 1rem; }
+.ml2 { margin-left: 1rem; }
+.mr2 { margin-right: 1rem; }
+.mt2 { margin-top: 1rem; }
+
+.m3 { margin: 1.5rem; }
+.ml3 { margin-left: 1.5rem; }
+.mr3 { margin-right: 1.5rem; }
+.mt3 { margin-top: 1.5rem; }
+
+.p0 { padding: 0; }
+.pl0 { padding-left: 0; }
+.pr0 { padding-right: 0; }
+.pb0 { padding-bottom: 0; }
+.pt0 { padding-top: 0; }
+
+.p1 { padding: 0.5rem; }
+.pl1 { padding-left: 0.5rem; }
+.pt1 { padding-top: 0.5rem; }
+.pb1 { padding-bottom: 0.5rem; }
+
+.p2 { padding: 1rem; }
+.pl2 { padding-left: 1rem; }
+.pr2 { padding-right: 1rem; }
+.pt2 { padding-top: 1rem; }
+
+/* Special stuff */
+.fancy-focus:focus { outline: 3px solid gold; }
+.fancy-border {
+    border-left: 50px solid;
+    border-image: linear-gradient(to right, crimson .1%, gold .1% 99.9%) 2;
+}
