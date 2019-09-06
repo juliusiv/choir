@@ -6,7 +6,8 @@ config :choir, Choir.Repo,
   password: "postgres",
   database: "choir_test",
   port: System.get_env("POSTGRES_PORT"),
-  pool: Ecto.Adapters.SQL.Sandbox
+  pool: Ecto.Adapters.SQL.Sandbox,
+  hostname: "postgres"
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
