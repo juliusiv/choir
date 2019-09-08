@@ -1,4 +1,5 @@
 defmodule ChoirWeb.PageController do
+  import Ecto
   use ChoirWeb, :controller
   alias Choir.Users.User
 
@@ -7,7 +8,7 @@ defmodule ChoirWeb.PageController do
   # TODO: This should probably be a signup/in page that will redirect to /listen (or something)
   # if they have an active session.
   def index(conn, _params) do
-    uuid = UUID.uuid1()
+    uuid = Ecto.UUID.generate
     IO.inspect uuid
     render conn, "index.html", uuid: uuid, page: "index"
   end
