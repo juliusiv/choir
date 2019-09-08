@@ -5,7 +5,7 @@ config :choir, Choir.Repo,
   username: "postgres",
   password: "postgres",
   database: "choir_dev",
-  hostname: "postgres",
+  hostname: System.get_env("POSTGRES_HOST", "localhost"),
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

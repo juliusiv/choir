@@ -24,18 +24,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    # - uses: harmon758/postgresql-action@v1
-    #   with:
-    #     postgresql version: '11'
     - name: Install Dependencies
       run: |
         mix local.rebar --force
         mix local.hex --force
         mix deps.get
     - name: Run Tests
+      # We need to run with POSTGRES_HOST because these commands run in a container
       run: |
-        mix ecto.create
-        mix test
+        POSTGRES_HOST=postgres mix ecto.create
+        POSTGRES_HOST=postgres mix test
       env:
         POSTGRES_HOST: postgres
         POSTGRES_PORT: ${{ job.services.postgres.ports['5432'] }}
