@@ -73,3 +73,11 @@ html, body {
     border-left: 50px solid;
     border-image: linear-gradient(to right, crimson .1%, gold .1% 99.9%) 2;
 }
+.fancy-link {
+    color: crimson;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.fancy-link:hover {
+    font-style: italic;
+}

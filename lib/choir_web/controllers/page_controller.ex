@@ -1,5 +1,6 @@
 defmodule ChoirWeb.PageController do
   use ChoirWeb, :controller
+  alias Choir.Users.User
 
   # The main page is where users hear the music for now. Once we're here, everything else will be handled
   # in the SPA.
@@ -19,6 +20,17 @@ defmodule ChoirWeb.PageController do
 
   def log_in(conn, _params) do
     IO.inspect _params
+    json conn, nil
+  end
+
+  def signup(conn, _params) do
+    changeset = User.changeset(%User{}, _params)
+    render conn, "signup.html", uuid: "_signup", page: "signup", changeset: changeset
+  end
+
+  def sign_up(conn, _params) do
+    IO.inspect _params
+    json conn, nil
   end
 
   # The rehearsal space is where users can tweak their own values to create

@@ -1,0 +1,38 @@
+<div class="fancy-border bg-ivory height-all serif">
+    <div class="absolute ml2 mt2">
+        <header>
+        <h1 class="font-huge">Choir</h1>
+        <p class="font-normal">Let's get set up.</p>
+        </header>
+
+        <%= form_for @conn, Routes.page_path(@conn, :sign_up), [class: "row mt3"], fn f -> %>
+            <span class="block">
+                <label for="name" class="font-normal mr1">
+                    Name: <%= text_input f, :name, class: "font-normal fancy-focus monospace", required: true, autofocus: true %>
+                </label>
+            </span>
+
+            <span class="block mt1">
+                <label for="email" class="font-normal mr1">
+                    Email: <%= text_input f, :email, class: "font-normal fancy-focus monospace", required: true %>
+                </label>
+            </span>
+
+            <span class="block mt1">
+                <label for="password" class="font-normal mr1">
+                    Password: <%= password_input f, :password, class: "font-normal fancy-focus monospace", required: true %>
+                </label>
+            </span>
+
+            <span class="block mt1">
+                <label for="password_confirm" class="font-normal mr1">
+                    Confirm password: <%= password_input f, :password, class: "font-normal fancy-focus monospace", required: true %>
+                </label>
+            </span>
+
+            <span class="block mt2">
+                <%= submit "Signup", class: "bg-gold pb1 pt1 pl2 pr2 bold serif font-normal" %>
+            </span>
+        <% end %>
+    </div>
+</div>
