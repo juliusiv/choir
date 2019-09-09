@@ -34,9 +34,9 @@ defmodule ChoirWeb.PageController do
   end
 
   def sign_up(conn, params) do
-    changeset = User.changeset(%User{}, params)
+    user = User.changeset(%User{}, params)
 
-    case Choir.Repo.insert(changeset) do
+    case Choir.Repo.insert(user) do
       # don't forget to set the session
       {:ok, _} ->
         redirect(conn |> put_session(:user, user.uid), to: "/")
