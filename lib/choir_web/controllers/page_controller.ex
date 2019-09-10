@@ -7,9 +7,7 @@ defmodule ChoirWeb.PageController do
   # TODO: This should probably be a signup/in page that will redirect to /listen (or something)
   # if they have an active session.
   def index(conn, _params) do
-    uuid = Ecto.UUID.generate()
-    IO.inspect(uuid)
-    render(conn, "index.html", uuid: uuid, page: "index")
+    render(conn, "index.html", uuid: Ecto.UUID.generate(), page: "index")
   end
 
   # The login page is served completely separate from the rest of the app, so we have more control over it and it's
@@ -19,10 +17,18 @@ defmodule ChoirWeb.PageController do
   end
 
   def log_in(conn, params) do
-    IO.inspect(params)
-    # also check password hash
-    user = Choir.Repo.get_by(User, email: params["email"])
-    redirect(conn |> put_session(:user, user.uid), to: "/")
+    # actually check password hash
+    user = Choir.Repo.get_by(User, email: params["email"], password: params["password"])
+
+    case user do
+      nil ->
+        json(conn |> put_status(:bad_request), %{
+          errors: ["Incorrect email/password combination"]
+        })
+
+      _ ->
+        redirect(conn |> put_session(:user, user.uid), to: "/")
+    end
   end
 
   def signup(conn, _params) do
@@ -34,11 +40,10 @@ defmodule ChoirWeb.PageController do
   end
 
   def sign_up(conn, params) do
-    user = User.changeset(%User{}, params)
+    changeset = User.changeset(%User{}, params)
 
-    case Choir.Repo.insert(user) do
-      # don't forget to set the session
-      {:ok, _} ->
+    case Choir.Repo.insert(changeset) do
+      {:ok, user} ->
         redirect(conn |> put_session(:user, user.uid), to: "/")
 
       {:error, _} ->
