@@ -24,12 +24,6 @@
                 </label>
             </span>
 
-            <span class="block mt1">
-                <label for="password_confirm" class="font-normal mr1">
-                    Confirm password: <%= password_input f, :password, class: "font-normal fancy-focus monospace", required: true %>
-                </label>
-            </span>
-
             <span class="block mt2">
                 <%= submit "Signup", class: "bg-gold pb1 pt1 pl2 pr2 bold serif font-normal" %>
             </span>

@@ -1,5 +1,4 @@
 defmodule ChoirWeb.PageController do
-  import Ecto
   use ChoirWeb, :controller
   alias Choir.Users.User
 
@@ -8,35 +7,54 @@ defmodule ChoirWeb.PageController do
   # TODO: This should probably be a signup/in page that will redirect to /listen (or something)
   # if they have an active session.
   def index(conn, _params) do
-    uuid = Ecto.UUID.generate
-    IO.inspect uuid
-    render conn, "index.html", uuid: uuid, page: "index"
+    render(conn, "index.html", uuid: Ecto.UUID.generate(), page: "index")
   end
 
   # The login page is served completely separate from the rest of the app, so we have more control over it and it's
   # more secure (no JS dependencies, third party libs, etc.)
   def login(conn, _params) do
-    render conn, "login.html", uuid: "_login", page: "login"
+    render(conn, "login.html", uuid: "_login", page: "login")
   end
 
-  def log_in(conn, _params) do
-    IO.inspect _params
-    json conn, nil
+  def log_in(conn, params) do
+    user = Choir.Repo.get_by(User, email: params["email"])
+
+    case user do
+      nil ->
+        json(conn |> put_status(:bad_request), %{
+          errors: ["Incorrect email/password combination"]
+        })
+
+      _ ->
+        if not Bcrypt.verify_pass(params["password"], user.password_hash) do
+          json(conn |> put_status(:bad_request), %{
+            errors: ["Incorrect email/password combination"]
+          })
+        else
+          redirect(conn |> put_session(:user, user.uid), to: "/")
+        end
+    end
   end
 
   def signup(conn, _params) do
-    changeset = User.changeset(%User{}, _params)
-    render conn, "signup.html", uuid: "_signup", page: "signup", changeset: changeset
+    render(conn, "signup.html",
+      uuid: "_signup",
+      page: "signup",
+      changeset: User.changeset(%User{}, %{})
+    )
   end
 
-  def sign_up(conn, _params) do
-    IO.inspect _params
-    json conn, nil
-  end
+  def sign_up(conn, params) do
+    changeset = User.changeset(%User{}, params)
 
-  # The rehearsal space is where users can tweak their own values to create
-  # music they like (which is also helpful for debugging the generative synthesis.)
-  def rehearse(conn, _params) do
-    render conn, "rehearse.html", uuid: "_rehearsing", page: "rehearse"
+    case Choir.Repo.insert(changeset) do
+      {:ok, user} ->
+        redirect(conn |> put_session(:user, user.uid), to: "/")
+
+      {:error, _} ->
+        json(conn |> put_status(:bad_request), %{
+          errors: ["There was a problem creating the user"]
+        })
+    end
   end
 end
