@@ -18,7 +18,7 @@ defmodule ChoirWeb.PageController do
 
   def log_in(conn, params) do
     # actually check password hash
-    user = Choir.Repo.get_by(User, email: params["email"], password: params["password"])
+    user = Choir.Repo.get_by(User, email: params["email"])
 
     case user do
       nil ->
@@ -27,7 +27,13 @@ defmodule ChoirWeb.PageController do
         })
 
       _ ->
-        redirect(conn |> put_session(:user, user.uid), to: "/")
+        if not Bcrypt.verify_pass(params["password"], user.password_hash) do
+          json(conn |> put_status(:bad_request), %{
+            errors: ["Incorrect email/password combination"]
+          })
+        else
+          redirect(conn |> put_session(:user, user.uid), to: "/")
+        end
     end
   end
 

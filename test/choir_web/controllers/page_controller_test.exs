@@ -44,7 +44,6 @@ defmodule ChoirWeb.PageControllerTest do
     } do
       conn = post(conn, "/login", email: existing_user.email, password: "wrong password")
 
-      # assert(redirected_to(conn) == "/")
       assert conn.status == 400
     end
   end

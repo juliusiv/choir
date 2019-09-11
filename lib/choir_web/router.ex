@@ -33,13 +33,6 @@ defmodule ChoirWeb.Router do
     post("/", PageController, :sign_up)
   end
 
-  scope "/signup", ChoirWeb do
-    pipe_through(:browser)
-
-    get("/", PageController, :signup)
-    post("/", PageController, :sign_up)
-  end
-
   # Other scopes may use custom stacks.
   scope "/api", ChoirWeb do
     pipe_through(:api)
