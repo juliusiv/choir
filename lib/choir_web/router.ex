@@ -13,12 +13,6 @@ defmodule ChoirWeb.Router do
     plug(:accepts, ["json"])
   end
 
-  scope "/", ChoirWeb do
-    pipe_through(:browser)
-
-    get("/", PageController, :index)
-  end
-
   scope "/login", ChoirWeb do
     pipe_through(:browser)
 
@@ -36,5 +30,13 @@ defmodule ChoirWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", ChoirWeb do
     pipe_through(:api)
+  end
+
+  # We put this last catch-all at the end so we don't conflict with our SPA routes.
+  scope "/", ChoirWeb do
+    pipe_through(:browser)
+
+    get("/", PageController, :index)
+    get("/*anything", PageController, :index)
   end
 end
