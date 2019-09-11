@@ -17,7 +17,6 @@ defmodule ChoirWeb.PageController do
   end
 
   def log_in(conn, params) do
-    # actually check password hash
     user = Choir.Repo.get_by(User, email: params["email"])
 
     case user do

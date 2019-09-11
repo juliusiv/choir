@@ -46,6 +46,12 @@ defmodule ChoirWeb.PageControllerTest do
 
       assert conn.status == 400
     end
+
+    test "we fail logging in for nonexistent users", %{conn: conn} do
+      conn = post(conn, "/login", email: "user that does not exist", password: "wrong password")
+
+      assert conn.status == 400
+    end
   end
 
   describe "signin flow" do
