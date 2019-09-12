@@ -22,6 +22,7 @@ class Synthesizer {
 
             this._connectAllOscillators();
             this._start();
+            this.audioContext.resume();
         }
         catch (e) {
             throw new Error("Web Audio API is not supported in this browser");
