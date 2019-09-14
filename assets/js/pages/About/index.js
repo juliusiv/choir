@@ -1,10 +1,12 @@
 import React from "react";
+import css from "<style>"
 import Link from "<choir>/components/Link";
+import PageContainer, { Pages } from "<choir>/containers/PageContainer";
 
 const QAndA = ({ question, answer, ...props }) => {
     return (
-        <div {...props} className="mb2">
-            <h3 className="c-crimson bold">{question}</h3>
+        <div {...props} className={css`mb2`}>
+            <h3 className={css`cRed bold`}>{question}</h3>
             <p>{answer}</p>
         </div>
     );
@@ -41,13 +43,13 @@ const QUESTIONS_AND_ANSWERS = [
 class About extends React.Component {
     render() {
         return (
-            <div>
+            <PageContainer page={Pages.ABOUT}>
                 <h1>Choir</h1>
 
-                <h2 className="mb1">Questions and Answers</h2>
+                <h2 className={css`mb1`}>Questions and Answers</h2>
 
-                <div className="mb3">
-                    <ul className="bullets-none">
+                <div className={css`mb3`}>
+                    <ul className={css`bulletsNone`}>
                         {
                             QUESTIONS_AND_ANSWERS.map(({ question, id }) => (
                                 <li key={id}>
@@ -63,7 +65,7 @@ class About extends React.Component {
                         <QAndA {...props} key={props.id} />
                     ))
                 }
-            </div>
+            </PageContainer>
         );
     }
 }

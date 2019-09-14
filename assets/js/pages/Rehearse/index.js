@@ -1,9 +1,14 @@
 import React from "react";
+import PageContainer, { Pages } from "<choir>/containers/PageContainer";
 
 
 class Rehearse extends React.Component {
     render() {
-        return <div>rehearse here</div>
+        return (
+            <PageContainer withNavigation={true} page={Pages.ABOUT}>
+                rehearse here
+            </PageContainer>
+        );
     }
 }
 

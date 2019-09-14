@@ -30,17 +30,21 @@ module.exports = (env, options) => ({
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"]
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader?modules=true"
+        ]
       }
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: "../css/app.css" }),
+    new MiniCssExtractPlugin({ filename: "../js/App.css" }),
     new CopyWebpackPlugin([{ from: "static/", to: "../" }])
   ],
   resolve: {
     alias: {
-      "<choir>": path.resolve(__dirname, "js/")
+      "<choir>": path.resolve(__dirname, "js/"),
+      "<style>": path.resolve(__dirname, "js/utils/style.js")
     }
   }
 });

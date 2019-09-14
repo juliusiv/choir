@@ -4,33 +4,51 @@
     padding: 0px;
 }
 /* And make sure we're filling the page */
-html, body {
+html, body, main {
     height: 100%;
     font-size: 20px;
 }
 
+:root {
+    --chr-white: #EEE1C2;
+    --chr-black: #393D3F;
+    --chr-red: #D26359;
+    --chr-dark-green: #5D7967;
+    --chr-light-green: #9EB194;
+}
+
 /* Colors */
-.bg-gold { background-color: gold; }
-.bg-ivory { background-color: ivory; }
-.c-crimson { color: crimson; }
-.c-gold { color: gold; }
+.cWhite { color: var(--chr-white); }
+.cBlack { color: var(--chr-black); }
+.cRed { color: var(--chr-red); }
+.cDarkGreen { color: var(--chr-dark-green); }
+.cLightGreen { color: var(--chr-light-green); }
+.bgWhite { background-color: var(--chr-white); }
+.bgBlack { background-color: var(--chr-black); }
+.bgRed { background-color: var(--chr-red); }
+.bgDarkGreen { background-color: var(--chr-dark-green); }
+.bgLightGreen { background-color: var(--chr-light-green); }
 
 /* Typography */
 .bold { font-weight: bold; }
 .serif { font-family: 'Lancelot', cursive; }
 .monospace { font-family: monospace; }
-.font-normal { font-size: 1rem; }
-.font-tiny { font-size: 0.8rem; }
-.font-large { font-size: 2rem; }
-.font-huge { font-size: 3rem; }
+.italic { font-style: italic; }
+.fontNormal { font-size: 1rem; }
+.fontTiny { font-size: 0.65rem; }
+.fontMedium { font-size: 1.5rem; }
+.fontLarge { font-size: 2rem; }
+.fontHuge { font-size: 3rem; }
+.underlineNone { text-decoration: none; }
 
 /* Layout stuff */
 .block { display: block; }
-.height-all { height: 100%; }
+.heightAll { height: 100%; }
 .absolute { position: absolute; }
-.bullets-none { list-style-type: none; }
-.overflow-auto { overflow: auto; }
+.bulletsNone { list-style-type: none; }
+.overflowAuto { overflow: auto; }
 .flex { display: flex; }
+.textCenter { text-align: center; }
 
 /* Margins and paddings */
 .m0 { margin: 0; }
@@ -72,18 +90,27 @@ html, body {
 .pl2 { padding-left: 1rem; }
 .pr2 { padding-right: 1rem; }
 .pt2 { padding-top: 1rem; }
+.pb2 { padding-bottom: 1rem; }
+
+.p3 { padding: 1.5rem; }
+.pl3 { padding-left: 1.5rem; }
+.pr3 { padding-right: 1.5rem; }
+.pb3 { padding-bottom: 1.5rem; }
+.pt3 { padding-top: 1.5rem; }
 
 /* Special stuff */
-.fancy-focus:focus { outline: 3px solid gold; }
-.fancy-border {
+.fancyFocus:focus { outline: 3px solid gold; }
+.fancyBorder {
     border-left: 50px solid;
     border-image: linear-gradient(to right, crimson .1%, gold .1% 99.9%) 2;
 }
-.fancy-link {
+.fancyLink {
     color: crimson;
     font-weight: bold;
     text-decoration: underline;
 }
-.fancy-link:hover {
+.fancyLink:hover {
     font-style: italic;
 }
+.cursorPointer { cursor: pointer; }
+.cursorHelp { cursor: help; }
