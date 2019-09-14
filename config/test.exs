@@ -15,7 +15,8 @@ config :choir, ChoirWeb.Endpoint,
   http: [port: 4002],
   server: false
 
-# Print only warnings and errors during test
+# Print only warnings and errors during test.
 config :logger, level: :warn
 
+# We'll encrypt in fewer rounds for tests so they're a bit faster.
 config :bcrypt_elixir, log_rounds: 4
