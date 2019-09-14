@@ -1,2 +1,2 @@
-<div id="root" class="height-all"></div>
+<div id="root" style="height:100%;"></div>
 <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>

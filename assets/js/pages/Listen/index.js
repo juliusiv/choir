@@ -1,5 +1,7 @@
 import React from "react";
-import NavigationContainer from "<choir>/containers/NavigationContainer";
+
+import css from "<style>";
+import PageContainer, { Pages } from "<choir>/containers/PageContainer";
 import { useSynthesizer } from "<choir>/utils/synthesizer";
 import Button from "<choir>/components/Button";
 
@@ -7,8 +9,13 @@ const Listen = props => {
     const synthesizer = useSynthesizer();
 
     return (
-        <NavigationContainer>
-            <div>listen</div>
+        <PageContainer withNavigation={true} page={Pages.LISTEN}>
+            <div onClick={synthesizer.start} className={css`p3 cursorPointer textCenter bgRed cWhite mb3 italic`}>
+                Click here to start the symphony {}
+                <span title="Some browsers don't like it when sounds automatically start playing without your consent." className={css`fontTiny cursorHelp bold`}>
+                    &#9432;
+                </span>
+            </div>
             <Button onClick={synthesizer.unmute}>start</Button>
             <Button onClick={synthesizer.mute}>stop</Button>
 
@@ -20,7 +27,7 @@ const Listen = props => {
             <Button onClick={() => synthesizer.setFrequency(440.00)}>A</Button>
             <Button onClick={() => synthesizer.setFrequency(493.88)}>B</Button>
             <Button onClick={() => synthesizer.setFrequency(523.25)}>C</Button>
-        </NavigationContainer>
+        </PageContainer>
     );
 }
 

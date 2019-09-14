@@ -3,7 +3,8 @@ import React from "react";
 // We need to import the CSS so that webpack will load it.
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
-import css from "../css/app.css";
+import "./App.css";
+import css from "<style>";
 
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
@@ -13,9 +14,10 @@ import css from "../css/app.css";
 //
 import "phoenix_html"
 import ReactDOM from "react-dom";
+import classNames from "classnames";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import { About, Frontpage, Listen, Rehearse } from "./pages";
+import { About, Account, Frontpage, Listen, Rehearse } from "./pages";
 
 // Import local files
 //
@@ -26,13 +28,12 @@ class App extends React.Component {
     render() {
         return (
             <Router>
-                <div className="bg-ivory height-all serif overflow-auto">
-                    <div className="p2">
-                        <Route path="/" exact component={Frontpage} />
-                        <Route path="/rehearse" exact component={Rehearse} />
-                        <Route path="/listen" exact component={Listen} />
-                        <Route path="/about" exact component={About} />
-                    </div>
+                <div className={css`bgWhite heightAll serif overflowAuto`}>
+                    <Route path="/" exact component={Frontpage} />
+                    <Route path="/rehearse" exact component={Rehearse} />
+                    <Route path="/listen" exact component={Listen} />
+                    <Route path="/about" exact component={About} />
+                    <Route path="/account" exact component={Account} />
                 </div>
             </Router>
         );

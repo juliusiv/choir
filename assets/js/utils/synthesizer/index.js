@@ -21,20 +21,25 @@ class Synthesizer {
             };
 
             this._connectAllOscillators();
-            this._start();
-            this.audioContext.resume();
         }
         catch (e) {
             throw new Error("Web Audio API is not supported in this browser");
         }
+
+        this.started = false;
     }
 
-    _start = () => {
-        // Make sure all the oscillators have been connected to the output before starting them.
-        this.oscillators.bass.start();
-        this.oscillators.treble.start();
-        this.oscillators.alto.start();
-        this.oscillators.soprano.start();
+    start = () => {
+        // The synth must be explicitly started in order to work. We do this because some browsers (Safari)
+        // require the audio context to be started after a user action.
+        if (!this.started) {
+            this.oscillators.bass.start();
+            this.oscillators.treble.start();
+            this.oscillators.alto.start();
+            this.oscillators.soprano.start();
+
+            this.started = true;
+        }
     }
 
     setFrequency = hz => {

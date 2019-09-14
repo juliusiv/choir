@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "<choir>/components/Link";
+import PageContainer, { Pages } from "<choir>/containers/PageContainer";
 
 class Frontpage extends React.Component {
     render() {
         return (
-            <div>
+            <PageContainer page={Pages.ABOUT}>
                 <h1>Choir</h1>
 
                 <div>
@@ -12,7 +13,7 @@ class Frontpage extends React.Component {
 
                     <p>If you already have an account, <Link to="/listen">click here</Link> to listen. If you don't have an account, <Link to="/signup">click here</Link> to sign up. If you're confused about what this is, <Link to="/about">click here</Link> to find out.</p>
                 </div>
-            </div>
+            </PageContainer>
         );
     }
 }
