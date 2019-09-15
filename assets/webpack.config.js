@@ -13,10 +13,10 @@ module.exports = (env, options) => ({
     ]
   },
   entry: {
-    "./js/app.js": glob.sync("./vendor/**/*.js").concat(["./js/app.js"])
+    "./src/App.js": glob.sync("./vendor/**/*.js").concat(["./src/App.js"])
   },
   output: {
-    filename: "app.js",
+    filename: "App.js",
     path: path.resolve(__dirname, "../priv/static/js")
   },
   module: {
@@ -32,19 +32,26 @@ module.exports = (env, options) => ({
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader?modules=true"
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]'
+            }
+          }
         ]
       }
     ]
   },
   plugins: [
+    // This filename is referencing the priv/static App.css, the one in src.
     new MiniCssExtractPlugin({ filename: "../js/App.css" }),
     new CopyWebpackPlugin([{ from: "static/", to: "../" }])
   ],
   resolve: {
     alias: {
-      "<choir>": path.resolve(__dirname, "js/"),
-      "<style>": path.resolve(__dirname, "js/utils/style.js")
+      "<choir>": path.resolve(__dirname, "src/"),
+      "<style>": path.resolve(__dirname, "src/utils/style.js")
     }
   }
 });
