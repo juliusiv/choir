@@ -11,6 +11,7 @@ class Rehearse extends React.Component {
                 <div>
                     In the rehearsal space you can play around with different values to see what happens.
                 </div>
+
             </PageContainer>
         );
     }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+// Might not actually really need this because the state is stored in the synth anyway...
 const useSynthesizer = () => {
     const [synthesizer, setSynthesizer] = useState(new Synthesizer());
 

@@ -11,9 +11,10 @@ defmodule Choir.Application do
       # Start the Ecto repository
       Choir.Repo,
       # Start the endpoint when the application starts
-      ChoirWeb.Endpoint
+      ChoirWeb.Endpoint,
       # Starts a worker by calling: Choir.Worker.start_link(arg)
       # {Choir.Worker, arg},
+      Choir.Connections
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

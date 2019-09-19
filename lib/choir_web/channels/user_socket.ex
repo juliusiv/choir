@@ -2,7 +2,7 @@ defmodule ChoirWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", ChoirWeb.RoomChannel
+  channel("listen:*", ChoirWeb.ListenChannel)
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

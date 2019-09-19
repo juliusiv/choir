@@ -9,6 +9,7 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
+    "@react-hook/mouse-position": "^1.0.3",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
     "phoenix": "file:../deps/phoenix",
@@ -26,6 +27,7 @@
     "babel-loader": "^8.0.0",
     "copy-webpack-plugin": "^4.5.0",
     "css-loader": "^2.1.1",
+    "eslint-plugin-react-hooks": "^2.1.1",
     "mini-css-extract-plugin": "^0.4.0",
     "optimize-css-assets-webpack-plugin": "^4.0.0",
     "style-loader": "^1.0.0",
