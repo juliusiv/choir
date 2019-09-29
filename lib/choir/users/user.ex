@@ -2,11 +2,11 @@ defmodule Choir.Users.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Ecto.UUID
-  # alias Bcrypt
 
   schema "user" do
     field(:email, :string, null: false)
-    field(:name, :string, null: false)
+    field(:first_name, :string, null: false)
+    field(:last_name, :string, null: false)
     field(:password, :string, virtual: true)
     field(:password_hash, :string, null: false)
     field(:uid, :string, null: false)
@@ -17,10 +17,11 @@ defmodule Choir.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :name, :password, :uid])
+    |> cast(attrs, [:email, :first_name, :last_name, :password, :uid])
+    |> unique_constraint(:email)
     |> put_change(:uid, UUID.generate())
     |> put_password_hash
-    |> validate_required([:email, :name, :password_hash, :uid])
+    |> validate_required([:email, :first_name, :last_name, :password_hash, :uid])
   end
 
   defp put_password_hash(changeset) do

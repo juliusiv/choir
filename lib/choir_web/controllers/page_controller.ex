@@ -10,10 +10,8 @@ defmodule ChoirWeb.PageController do
     render(conn, "index.html", uuid: Ecto.UUID.generate(), page: "index")
   end
 
-  # The login page is served completely separate from the rest of the app, so we have more control over it and it's
-  # more secure (no JS dependencies, third party libs, etc.)
-  def login(conn, _params) do
-    render(conn, "login.html", uuid: "_login", page: "login")
+  defp set_user_session(conn, user) do
+    conn |> fetch_session |> put_session(:user, user.uid)
   end
 
   def log_in(conn, params) do
@@ -21,40 +19,41 @@ defmodule ChoirWeb.PageController do
 
     case user do
       nil ->
-        json(conn |> put_status(:bad_request), %{
+        json(put_status(conn, :bad_request), %{
           errors: ["Incorrect email/password combination"]
         })
 
       _ ->
         if not Bcrypt.verify_pass(params["password"], user.password_hash) do
-          json(conn |> put_status(:bad_request), %{
+          json(put_status(conn, :bad_request), %{
             errors: ["Incorrect email/password combination"]
           })
         else
-          redirect(conn |> put_session(:user, user.uid), to: "/")
+          conn |> set_user_session(user) |> send_resp(:ok, "")
         end
     end
   end
 
-  def signup(conn, _params) do
-    render(conn, "signup.html",
-      uuid: "_signup",
-      page: "signup",
-      changeset: User.changeset(%User{}, %{})
-    )
-  end
-
   def sign_up(conn, params) do
+    IO.inspect(params)
     changeset = User.changeset(%User{}, params)
 
     case Choir.Repo.insert(changeset) do
       {:ok, user} ->
-        redirect(conn |> put_session(:user, user.uid), to: "/")
+        conn |> set_user_session(user) |> send_resp(:ok, "")
 
-      {:error, _} ->
-        json(conn |> put_status(:bad_request), %{
-          errors: ["There was a problem creating the user"]
-        })
+      {:error, change} ->
+        case change.errors do
+          [email: _] ->
+            json(put_status(conn, :conflict), %{
+              errors: ["A user with that email already exists."]
+            })
+
+          _ ->
+            json(put_status(conn, :bad_request), %{
+              errors: ["There was a problem creating the user"]
+            })
+        end
     end
   end
 end
