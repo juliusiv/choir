@@ -39,9 +39,9 @@ const PAGE_LINKS = [
 const Navigation = ({ active, ...props }) => {
     return (
         <nav className={css`bgBlack cWhite`} {...props}>
-            <div className={css`pl2 pr2 pb3 pt3 bgRed bold fontMedium`}>
+            <Link to="/" className={css`pl2 pr2 pb3 pt3 bgRed cWhite bold block fontMedium cursorPointer underlineNone`}>
                 Choir
-            </div>
+            </Link>
             {
                 PAGE_LINKS.map(({ to, page, title }) => (
                     <NavLink to={to} isActive={page === active} key={page}>

@@ -11,7 +11,8 @@ defmodule ChoirWeb.PageController do
   end
 
   defp set_user_session(conn, user) do
-    conn |> fetch_session |> put_session(:user, user.uid)
+    token = Phoenix.Token.sign(conn, "auth", user.uid)
+    conn |> put_session(:token, token)
   end
 
   def log_in(conn, params) do
@@ -54,5 +55,9 @@ defmodule ChoirWeb.PageController do
             })
         end
     end
+  end
+
+  def log_out(conn, _params) do
+    conn |> delete_session(:token) |> send_resp(:ok, "")
   end
 end
