@@ -35,7 +35,6 @@ defmodule ChoirWeb.PageController do
   end
 
   def sign_up(conn, params) do
-    IO.inspect(params)
     changeset = User.changeset(%User{}, params)
 
     case Choir.Repo.insert(changeset) do
