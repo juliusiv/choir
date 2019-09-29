@@ -20,19 +20,24 @@ defmodule ChoirWeb.PageControllerTest do
   end
 
   describe "the index should just return the SPA" do
-    test "GET /", %{conn: conn} do
-      conn = get(conn, "/")
+    test "unauthed pages", %{conn: conn} do
+      conn = get(conn, "/login")
       assert conn.status == 200
+    end
+
+    test "authed pages", %{conn: conn} do
+      conn = get(conn, "/needs_auth")
+      assert(redirected_to(conn) == "/login")
     end
   end
 
-  describe "login flow" do
+  describe "login" do
     test "we can successfully log in", %{conn: conn, existing_user: existing_user} do
       conn =
         post(conn, "/api/log_in", email: existing_user.email, password: existing_user.password)
 
       assert conn.status == 200
-      assert(get_session(conn, :user) == existing_user.uid)
+      assert(get_session(conn, :token) != nil)
     end
 
     test "we fail logging in for invalid email/password combos", %{
@@ -52,7 +57,38 @@ defmodule ChoirWeb.PageControllerTest do
     end
   end
 
-  describe "signin flow" do
+  describe "log out" do
+    test "we can successfully log in and out", %{conn: conn, existing_user: existing_user} do
+      conn =
+        post(conn, "/api/log_in", email: existing_user.email, password: existing_user.password)
+
+      assert conn.status == 200
+      assert(get_session(conn, :token) != nil)
+
+      conn = post(conn, "/api/log_out")
+
+      assert conn.status == 200
+      assert(get_session(conn, :token) == nil)
+    end
+
+    test "we fail logging in for invalid email/password combos", %{
+      conn: conn,
+      existing_user: existing_user
+    } do
+      conn = post(conn, "/api/log_in", email: existing_user.email, password: "wrong password")
+
+      assert conn.status == 400
+    end
+
+    test "we fail logging in for nonexistent users", %{conn: conn} do
+      conn =
+        post(conn, "/api/log_in", email: "user that does not exist", password: "wrong password")
+
+      assert conn.status == 400
+    end
+  end
+
+  describe "signin" do
     test "we can successfully sign up", %{conn: conn} do
       email = "someone-#{Ecto.UUID.generate()}@email.com"
 
@@ -66,7 +102,8 @@ defmodule ChoirWeb.PageControllerTest do
 
       assert conn.status == 200
       user = Choir.Repo.get_by(User, email: email)
-      assert(get_session(conn, :user) == user.uid)
+      assert user != nil
+      assert get_session(conn, :token) != nil
     end
 
     test "we fail signing up for incomplete data", %{conn: conn} do
