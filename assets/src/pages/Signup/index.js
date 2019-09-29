@@ -87,40 +87,6 @@ const Signup = ({ ...props }) => {
                     Sign up
                 </Button>
             </form>
-
-            {/* <form>
-                <span className={css`block mt1`}>
-                    <label htmlFor="firstName" className={css`fontNormal mr1`}>
-                        <span className={css`fontNormal mr1`}>First Name:</span>
-                        <input type="text" autoFocus={true} className={css`fancyFocus`} />
-                    </label>
-                </span>
-
-                <span className={css`block mt1`}>
-                    <label htmlFor="lastName" className={css`fontNormal mr1`}>
-                        <span className={css`fontNormal mr1`}>Last Name:</span>
-                        <input type="text" className={css`fancyFocus`} />
-                    </label>
-                </span>
-
-                <span className={css`block mt1`}>
-                    <label htmlFor="email" className={css`fontNormal mr1`}>
-                        <span className={css`fontNormal mr1`}>Email:</span>
-                        <input type="email" className={css`fancyFocus monospace`} />
-                    </label>
-                </span>
-
-                <span className={css`block mt1`}>
-                    <label htmlFor="password" className={css`fontNormal mr1`}>
-                        <span className={css`fontNormal mr1`}>Password:</span>
-                        <input type="password" className={css`fancyFocus`} />
-                    </label>
-                </span>
-
-                <span className={css`block mt2`}>
-                    <Button type="submit" value="Sign up" />
-                </span>
-            </form> */}
         </PageContainer>
     );
 };
