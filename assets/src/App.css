@@ -50,6 +50,11 @@ html, body, main {
 .flex { display: flex; }
 .textCenter { text-align: center; }
 
+/* Borders */
+.border { border: 2px solid; }
+.bcRed { border-color: var(--chr-red); }
+.bcBlack { border-color: var(--chr-black); }
+
 /* Margins and paddings */
 .m0 { margin: 0; }
 .ml0 { margin-left: 0; }
@@ -99,7 +104,7 @@ html, body, main {
 .pt3 { padding-top: 1.5rem; }
 
 /* Special stuff */
-.fancyFocus:focus { outline: 3px solid gold; }
+.fancyFocus:focus { outline: 3px solid var(--chr-light-green); }
 .fancyBorder {
     border-left: 50px solid;
     border-image: linear-gradient(to right, crimson .1%, gold .1% 99.9%) 2;
@@ -113,4 +118,5 @@ html, body, main {
     font-style: italic;
 }
 .cursorPointer { cursor: pointer; }
+.cursorDefault { cursor: default; }
 .cursorHelp { cursor: help; }

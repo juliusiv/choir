@@ -17,7 +17,7 @@ import ReactDOM from "react-dom";
 import classNames from "classnames";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import { About, Account, Frontpage, Listen, Rehearse } from "./pages";
+import { About, Account, Frontpage, Listen, Login, Rehearse, Signup } from "./pages";
 
 // Import local files
 //
@@ -34,6 +34,8 @@ class App extends React.Component {
                     <Route path="/listen" exact component={Listen} />
                     <Route path="/about" exact component={About} />
                     <Route path="/account" exact component={Account} />
+                    <Route path="/login" exact component={Login} />
+                    <Route path="/signup" exact component={Signup} />
                 </div>
             </Router>
         );

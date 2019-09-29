@@ -1,10 +1,18 @@
 import React from "react";
+import classnames from "classnames";
 
 import css from "<style>";
 
-const Button = ({ children, ...props }) => {
+const Button = ({ children, className, ...props }) => {
     return (
-        <button className={css`bgDarkGreen pb1 pt1 pl2 pr2 bold serif fontNormal mr2`} {...props}>
+        <button
+            className={classnames({
+                [css`bgDarkGreen pb1 pt1 pl2 pr2 bold serif fontNormal mr2 cursorPointer`]: true,
+                [css`bgLightGreen cursorDefault`]: props.disabled,
+                [className]: true,
+            })}
+            {...props}
+        >
             {children}
         </button>
     );
