@@ -49,6 +49,7 @@ html, body, main {
 .overflowAuto { overflow: auto; }
 .flex { display: flex; }
 .textCenter { text-align: center; }
+.justifyCenter { justify-content: center; }
 
 /* Borders */
 .border { border: 2px solid; }
