@@ -42,7 +42,7 @@ const Navigation = ({ active, ...props }) => {
         <nav className={css`bgBlack cWhite`} {...props}>
             <Link to="/" className={css`pl2 pr2 pb3 pt3 bgRed cWhite bold block fontMedium cursorPointer underlineNone flex justifyCenter`}>
                 <div style={{ height: "2rem" }}>
-                    <Icon icon="logo" color="var(--chr-white)" />
+                    <Icon icon="logo" color="var(--chr-white)" className={css`heightAll`} />
                 </div>
             </Link>
             {

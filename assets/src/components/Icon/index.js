@@ -11,7 +11,7 @@ const PATHS = {
 
 const Icon = ({ icon, color, ...props }) => {
     const style = {
-        ...props.style, ...{ height: "100%", fill: color }
+        ...props.style, ...{ fill: color }
     };
     const viewBox = PATHS[icon].viewBox || "0 0 200 200";
 
