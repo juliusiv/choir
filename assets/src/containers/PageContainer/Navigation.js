@@ -8,8 +8,8 @@ import Pages from "./Pages";
 
 const NavLink = ({ children, isActive, ...props }) => {
     const classes = classNames(
-        css`pl2 pr2 pt1 pb1 cWhite block underlineNone`,
-        { [css`bgDarkGreen bold`]: isActive }
+        css`pl2 pr2 pt1 pb1 mr3 ml3 cBlack block underlineNone`,
+        { [css`borderBottom bold borderTop bcBlack`]: isActive }
     );
 
     return (
@@ -39,20 +39,23 @@ const PAGE_LINKS = [
 
 const Navigation = ({ active, ...props }) => {
     return (
-        <nav className={css`bgBlack cWhite`} {...props}>
-            <Link to="/" className={css`pl2 pr2 pb3 pt3 bgRed cWhite bold block fontMedium cursorPointer underlineNone flex justifyCenter`}>
+        <div>
+            <Link to="/" className={css`pb3 pt3 cBlack bold block fontMedium cursorPointer underlineNone flex justifyCenter`}>
                 <div style={{ height: "2rem" }}>
-                    <Icon icon="logo" color="var(--chr-white)" className={css`heightAll`} />
+                    {/* Choir */}
+                    <Icon icon="logo" color="var(--chr-black)" className={css`heightAll`} />
                 </div>
             </Link>
-            {
-                PAGE_LINKS.map(({ to, page, title }) => (
-                    <NavLink to={to} isActive={page === active} key={page}>
-                        {title}
-                    </NavLink>
-                ))
-            }
-        </nav>
+            <nav className={css`flex flexRow justifyCenter borderBottom bcBlack pt1 pb1`} {...props}>
+                {
+                    PAGE_LINKS.map(({ to, page, title }) => (
+                        <NavLink to={to} isActive={page === active} key={page}>
+                            {title}
+                        </NavLink>
+                    ))
+                }
+            </nav>
+        </div>
     );
 };
 

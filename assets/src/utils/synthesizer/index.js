@@ -27,19 +27,20 @@ class Synthesizer {
             throw new Error("Web Audio API is not supported in this browser");
         }
 
-        this.started = false;
+        this.isStarted = false;
+        this.isMuted = undefined;
     }
 
     start = () => {
         // The synth must be explicitly started in order to work. We do this because some browsers (Safari)
         // require the audio context to be started after a user action.
-        if (!this.started) {
+        if (!this.isStarted) {
             this.oscillators.bass.start();
             this.oscillators.treble.start();
             this.oscillators.alto.start();
             this.oscillators.soprano.start();
 
-            this.started = true;
+            this.isStarted = true;
         }
     }
 
@@ -50,8 +51,15 @@ class Synthesizer {
         this.oscillators.soprano.frequency.value = hz;
     }
 
-    mute = () => this._disconnectAllOscillators();
-    unmute = () => this._connectAllOscillators();
+    mute = () => {
+        this.isMuted = true;
+        this._disconnectAllOscillators();
+    }
+
+    unmute = () => {
+        this.isMuted = false;
+        this._connectAllOscillators();
+    }
 
     _connectAllOscillators = () => {
         this.oscillators.bass.connect(this.audioContext.destination);

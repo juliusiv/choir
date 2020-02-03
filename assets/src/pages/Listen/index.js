@@ -19,7 +19,7 @@ const Listen = (props) => {
         () => console.log("joined!"),
         {
             "listen:data": newChoirData => {
-                setChoirData(newChoirData.count);
+                setChoirData(newChoirData);
             }
         }
     );
@@ -27,28 +27,39 @@ const Listen = (props) => {
     const [mousePositionRef, mousePosition] = useMousePosition(0, 0, 20);
 
     useInterval(() => {
-        console.log("nice")
         channel.push("listen:data", {
             mouseX: mousePosition.x,
             mouseY: mousePosition.Y
         });
     }, 1000);
 
+    const Info = () => (
+        <span title="Some browsers don't like it when sounds automatically start playing without your consent." className={css`fontTiny cursorHelp bold`}>
+            <sup>?</sup>
+        </span>
+    )
+    const clickable = (text, onClick) => (
+        <span onClick={onClick} className={css`cursorPointer underline`}>
+            {text}
+        </span>
+    )
+
     return (
-        <PageContainer withNavigation={true} page={Pages.LISTEN}>
+        <PageContainer withNavigation page={Pages.LISTEN}>
             <h1>Listen</h1>
 
-            <div onClick={synthesizer.start} className={css`p3 cursorPointer textCenter bgRed cWhite mb3 italic`}>
-                Click here to start the symphony {}
-                <span title="Some browsers don't like it when sounds automatically start playing without your consent." className={css`fontTiny cursorHelp bold`}>
-                    &#9432;
-                </span>
+            <div>
+                Everything you hear is generated based on everyone that's listening. {clickable("Click here", synthesizer.start)} <Info /> to start the music.
             </div>
+
+            {/* <div onClick={synthesizer.start} className={css`p3 cursorPointer textCenter border bcBlack bcWhite mb3 italic`}>
+                Click here to start the symphony {}
+
+            </div> */}
             <div className={css`mb3`}>
-                connections: {JSON.stringify(choirData)}
-                {/* mouseX: {choirData.mouseX}
+                mouseX: {choirData.mouseX}
                 mouseY: {choirData.mouseY}
-                connections: {choirData.connections} */}
+                connections: {choirData.count}
             </div>
             <Button onClick={synthesizer.unmute}>start</Button>
             <Button onClick={synthesizer.mute}>stop</Button>

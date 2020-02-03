@@ -10,7 +10,7 @@ html, body, main {
 }
 
 :root {
-    --chr-white: #EEE1C2;
+    --chr-white: #FFF7E4;
     --chr-black: #393D3F;
     --chr-red: #D26359;
     --chr-dark-green: #5D7967;
@@ -44,11 +44,15 @@ html, body, main {
 .fontLarge { font-size: 2rem; }
 .fontHuge { font-size: 3rem; }
 .underlineNone { text-decoration: none; }
+.underline { text-decoration: underline; }
 
 /* Layout stuff */
 .block { display: block; }
 .inline { display: inline; }
 .flex { display: flex; }
+.flexRow { flex-direction: row; }
+.flexColumn { flex-direction: column; }
+.grow1 { flex-grow: 1; }
 .alignCenter { align-items: center; }
 .justifyCenter { justify-content: center; }
 .heightAll { height: 100%; }
@@ -57,9 +61,12 @@ html, body, main {
 .overflowAuto { overflow: auto; }
 .textCenter { text-align: center; }
 .justifyCenter { justify-content: center; }
+.spaceAround { justify-content: space-around; }
 
 /* Borders */
 .border { border: 2px solid; }
+.borderBottom { border-bottom: 2px solid; }
+.borderTop { border-top: 2px solid; }
 .bcRed { border-color: var(--chr-red); }
 .bcBlack { border-color: var(--chr-black); }
 
