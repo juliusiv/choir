@@ -56,20 +56,20 @@ import { Socket } from "phoenix";
 //     .receive("error", resp => { console.log("Unable to join", resp) })
 
 const useSocket = () => {
-    const [socket, setSocket] = useState(
-        new Socket("/socket")
-        // new Socket("/socket", { params: { token: window.userToken } })
-    );
+  const [socket, setSocket] = useState(
+    new Socket("/socket")
+    // new Socket("/socket", { params: { token: window.userToken } })
+  );
 
-    useEffect(() => {
-        console.log("Connected to the socket.")
-        socket.connect();
-        return () => {
-            if (socket) socket.disconnect();
-        }
-    }, [])
+  useEffect(() => {
+    console.log("Connected to the socket.")
+    socket.connect();
+    return () => {
+      if (socket) socket.disconnect();
+    }
+  }, [])
 
-    return socket;
+  return socket;
 }
 
 export default useSocket;

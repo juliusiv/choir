@@ -1,6 +1,11 @@
 defmodule ChoirWeb.PageController do
   use ChoirWeb, :controller
-  alias Choir.Users.User
+  alias Choir.Accounts.User
+
+  import ChoirWeb.Authorize
+
+  alias Phauxth.Login
+  alias Choir.{Sessions, Sessions.Session}
 
   # The main page is where users hear the music for now. Once we're here, everything else will be handled
   # in the SPA.
@@ -16,6 +21,19 @@ defmodule ChoirWeb.PageController do
   end
 
   def log_in(conn, params) do
+    # def log_in(conn, %{"session" => params}) do
+    # case Login.verify(params) do
+    #   {:ok, user} ->
+    #     conn
+    #     |> add_session(user, params)
+    #     |> put_flash(:info, "User successfully logged in.")
+    #     |> redirect(to: get_session(conn, :request_path) || Routes.user_path(conn, :index))
+
+    #   {:error, message} ->
+    #     conn
+    #     |> put_flash(:error, message)
+    #     |> redirect(to: Routes.session_path(conn, :new))
+    # end
     user = Choir.Repo.get_by(User, email: params["email"])
 
     case user do

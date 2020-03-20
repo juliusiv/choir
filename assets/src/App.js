@@ -25,21 +25,21 @@ import { About, Account, Frontpage, Listen, Login, Rehearse, Signup } from "./pa
 // import socket from "./socket"
 
 class App extends React.Component {
-    render() {
-        return (
-            <Router>
-                <div className={css`bgWhite heightAll serif overflowAuto`}>
-                    <Route path="/" exact component={Frontpage} />
-                    <Route path="/rehearse" exact component={Rehearse} />
-                    <Route path="/listen" exact component={Listen} />
-                    <Route path="/about" exact component={About} />
-                    <Route path="/account" exact component={Account} />
-                    <Route path="/login" exact component={Login} />
-                    <Route path="/signup" exact component={Signup} />
-                </div>
-            </Router>
-        );
-    }
+  render() {
+    return (
+      <Router>
+        <div className={css`bgWhite heightAll serif overflowAuto`}>
+          <Route path="/" exact component={Frontpage} />
+          <Route path="/rehearse" exact component={Rehearse} />
+          <Route path="/listen" exact component={Listen} />
+          <Route path="/about" exact component={About} />
+          <Route path="/account" exact component={Account} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Signup} />
+        </div>
+      </Router>
+    );
+  }
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));
