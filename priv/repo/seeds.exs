@@ -2,10 +2,18 @@
 #
 #     mix run priv/repo/seeds.exs
 #
-# Inside the script, you can read and write to any of your
-# repositories directly:
+# It is also run when you use `mix ecto.setup` or `mix ecto.reset`
 #
-#     Choir.Repo.insert!(%Choir.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+
+users = [
+  %{
+    email: "test@example.com",
+    password: "password",
+    first_name: "Nick",
+    last_name: "Zammuto"
+  }
+]
+
+for user <- users do
+  {:ok, _} = Choir.Accounts.create_user(user)
+end
