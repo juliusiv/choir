@@ -11,7 +11,7 @@
   "dependencies": {
     "@react-hook/mouse-position": "^1.0.3",
     "classnames": "^2.2.6",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
     "react": "^16.9.0",
