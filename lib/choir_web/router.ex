@@ -17,7 +17,8 @@ defmodule ChoirWeb.Router do
   scope "/", ChoirWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    # get "/", PageController, :index
+    live("/", ChoirLive)
   end
 
   # Other scopes may use custom stacks.

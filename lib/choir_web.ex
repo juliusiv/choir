@@ -98,6 +98,7 @@ defmodule ChoirWeb do
       import ChoirWeb.ErrorHelpers
       import ChoirWeb.Gettext
       alias ChoirWeb.Router.Helpers, as: Routes
+      alias ChoirWeb.Components, as: C
     end
   end
 

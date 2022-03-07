@@ -4,6 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: 'Libre Baskerville', serif;
+}
+
+p {
+  @apply mb-5
+}
+
 /* Alerts and form errors used by phx.new */
 .alert {
   padding: 15px;
@@ -69,7 +77,6 @@
   background-color: #fefefe;
   margin: 15vh auto;
   padding: 20px;
-  border: 1px solid #888;
   width: 80%;
 }
 

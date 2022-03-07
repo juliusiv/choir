@@ -13,9 +13,10 @@ defmodule Choir.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Choir.PubSub},
       # Start the Endpoint (http/https)
-      ChoirWeb.Endpoint
+      ChoirWeb.Endpoint,
       # Start a worker by calling: Choir.Worker.start_link(arg)
       # {Choir.Worker, arg}
+      ChoirWeb.Presence
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
