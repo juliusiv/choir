@@ -1,0 +1,195 @@
+#1 [internal] load remote build context
+#1 DONE 1.6s
+
+#1 [internal] load remote build context
+#1 DONE 0.0s
+
+#2 copy /context /
+#2 DONE 0.7s
+
+#4 [internal] load metadata for docker.io/hexpm/elixir:1.13.3-erlang-24.2.2-debian-bullseye-20210902-slim
+#4 DONE 4.2s
+
+#3 [internal] load metadata for docker.io/library/debian:bullseye-20210902-slim
+#3 DONE 4.2s
+
+#5 [stage-1 1/6] FROM docker.io/library/debian:bullseye-20210902-slim@sha256:e3ed4be20c22a1358020358331d177aa2860632f25b21681d79204ace20455a6
+#5 DONE 0.0s
+
+#10 [builder  1/17] FROM docker.io/hexpm/elixir:1.13.3-erlang-24.2.2-debian-bullseye-20210902-slim@sha256:d70d7a4524b07128283f8a642499c1becdf65c90f5f588fbd621c6b96594a524
+#10 DONE 0.0s
+
+#6 [stage-1 2/6] RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales   && apt-get clean && rm -f /var/lib/apt/lists/*_*
+#6 CACHED
+
+#7 [stage-1 3/6] RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
+#7 CACHED
+
+#8 [stage-1 4/6] WORKDIR /app
+#8 CACHED
+
+#9 [stage-1 5/6] RUN chown nobody /app
+#9 CACHED
+
+#11 [builder  2/17] RUN apt-get update -y && apt-get install -y build-essential git     && apt-get clean && rm -f /var/lib/apt/lists/*_*
+#11 CACHED
+
+#12 [builder  3/17] WORKDIR /app
+#12 CACHED
+
+#13 [builder  4/17] RUN mix local.hex --force &&     mix local.rebar --force
+#13 CACHED
+
+#14 [builder  5/17] COPY mix.exs mix.lock ./
+#14 CACHED
+
+#15 [builder  6/17] RUN mix deps.get --only prod
+#15 CACHED
+
+#16 [builder  7/17] RUN mkdir config
+#16 CACHED
+
+#17 [builder  8/17] COPY config/config.exs config/prod.exs config/
+#17 DONE 0.1s
+
+#18 [builder  9/17] RUN mix deps.compile
+#18 0.760 ==> gettext
+#18 0.760 Compiling 1 file (.yrl)
+#18 0.797 Compiling 1 file (.erl)
+#18 0.892 Compiling 21 files (.ex)
+#18 1.557 Generated gettext app
+#18 1.927 ===> Analyzing applications...
+#18 1.964 ===> Compiling ranch
+#18 2.725 ===> Analyzing applications...
+#18 2.757 ===> Compiling telemetry
+#18 3.185 ==> telemetry_metrics
+#18 3.185 Compiling 7 files (.ex)
+#18 3.305 Generated telemetry_metrics app
+#18 3.679 ===> Analyzing applications...
+#18 3.702 ===> Compiling telemetry_poller
+#18 3.970 ==> jason
+#18 3.970 Compiling 10 files (.ex)
+#18 5.331 Generated jason app
+#18 5.476 ==> castore
+#18 5.476 Compiling 1 file (.ex)
+#18 5.494 Generated castore app
+#18 5.511 ==> esbuild
+#18 5.511 Compiling 3 files (.ex)
+#18 5.623 Generated esbuild app
+#18 5.638 ==> tailwind
+#18 5.638 Compiling 3 files (.ex)
+#18 5.740 Generated tailwind app
+#18 5.756 ==> phoenix_pubsub
+#18 5.756 Compiling 11 files (.ex)
+#18 6.104 Generated phoenix_pubsub app
+#18 6.492 ===> Analyzing applications...
+#18 6.669 ===> Compiling cowlib
+#18 17.92 ===> Analyzing applications...
+#18 17.99 ===> Compiling cowboy
+#18 19.41 ===> Analyzing applications...
+#18 19.47 ===> Compiling cowboy_telemetry
+#18 19.98 ==> mime
+#18 19.98 Compiling 1 file (.ex)
+#18 20.09 Generated mime app
+#18 20.10 ==> plug_crypto
+#18 20.10 Compiling 5 files (.ex)
+#18 20.23 Generated plug_crypto app
+#18 20.26 ==> plug
+#18 20.26 Compiling 1 file (.erl)
+#18 20.37 Compiling 41 files (.ex)
+#18 22.00 warning: System.stacktrace/0 is deprecated. Use __STACKTRACE__ instead
+#18 22.00   lib/plug/conn/wrapper_error.ex:23: Plug.Conn.WrapperError.reraise/3
+#18 22.00 
+#18 22.05 Generated plug app
+#18 22.07 ==> phoenix_html
+#18 22.07 Compiling 8 files (.ex)
+#18 22.57 Generated phoenix_html app
+#18 22.59 ==> phoenix_view
+#18 22.59 Compiling 5 files (.ex)
+#18 22.72 Generated phoenix_view app
+#18 22.74 ==> plug_cowboy
+#18 22.74 Compiling 5 files (.ex)
+#18 22.86 Generated plug_cowboy app
+#18 22.90 ==> phoenix
+#18 22.90 Compiling 69 files (.ex)
+#18 24.45 Generated phoenix app
+#18 24.48 ==> phoenix_live_view
+#18 24.48 Compiling 29 files (.ex)
+#18 25.92 Generated phoenix_live_view app
+#18 25.97 ==> phoenix_live_dashboard
+#18 25.97 Compiling 40 files (.ex)
+#18 26.92 Generated phoenix_live_dashboard app
+#18 26.97 ==> swoosh
+#18 26.97 Compiling 36 files (.ex)
+#18 27.80 Generated swoosh app
+#18 DONE 27.9s
+
+#19 [builder 10/17] COPY priv priv
+#19 DONE 0.0s
+
+#20 [builder 11/17] COPY assets assets
+#20 DONE 0.4s
+
+#21 [builder 12/17] RUN mix assets.deploy
+#21 0.755 
+#21 0.755 07:22:15.704 [debug] Downloading tailwind from https://github.com/tailwindlabs/tailwindcss/releases/download/v3.0.23/tailwindcss-linux-x64
+#21 4.307 
+#21 4.309 warn - No utility classes were detected in your source files. If this is unexpected, double-check the `content` option in your Tailwind CSS configuration.
+#21 4.309 warn - https://tailwindcss.com/docs/content-configuration
+#21 4.591 
+#21 4.591 Done in 470ms.
+#21 4.611 
+#21 4.611 07:22:19.562 [debug] Downloading esbuild from https://registry.npmjs.org/esbuild-linux-64/-/esbuild-linux-64-0.14.0.tgz
+#21 5.099 
+#21 5.099   ../priv/static/assets/app.js  338.6kb
+#21 5.099 
+#21 5.099 ⚡ Done in 60ms
+#21 5.189 Generated choir app
+#21 5.574 Check your digested files at "priv/static"
+#21 DONE 5.7s
+
+#22 [builder 13/17] COPY lib lib
+#22 DONE 0.0s
+
+#23 [builder 14/17] RUN mix compile
+#23 0.801 Compiling 19 files (.ex)
+#23 1.248 Generated choir app
+#23 DONE 1.3s
+
+#24 [builder 15/17] COPY config/runtime.exs config/
+#24 DONE 0.0s
+
+#25 [builder 16/17] COPY rel rel
+#25 DONE 0.0s
+
+#26 [builder 17/17] RUN mix release
+#26 0.933 * assembling choir-0.1.0 on MIX_ENV=prod
+#26 0.934 * using config/runtime.exs to configure the release at runtime
+#26 1.118 * skipping elixir.bat for windows (bin/elixir.bat not found in the Elixir installation)
+#26 1.120 * skipping iex.bat for windows (bin/iex.bat not found in the Elixir installation)
+#26 1.693 
+#26 1.693 Release created at _build/prod/rel/choir!
+#26 1.693 
+#26 1.693     # To start your system
+#26 1.693     _build/prod/rel/choir/bin/choir start
+#26 1.693 
+#26 1.693 Once the release is running:
+#26 1.693 
+#26 1.693     # To connect to it remotely
+#26 1.693     _build/prod/rel/choir/bin/choir remote
+#26 1.693 
+#26 1.693     # To stop it gracefully (you may also send SIGINT/SIGTERM)
+#26 1.693     _build/prod/rel/choir/bin/choir stop
+#26 1.693 
+#26 1.693 To list all commands:
+#26 1.693 
+#26 1.693     _build/prod/rel/choir/bin/choir
+#26 1.693 
+#26 DONE 1.8s
+
+#27 [stage-1 6/6] COPY --from=builder --chown=nobody:root /app/_build/prod/rel/choir ./
+#27 DONE 0.2s
+
+#28 exporting to image
+#28 exporting layers
+#28 exporting layers 0.3s done
