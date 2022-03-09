@@ -4,6 +4,8 @@
 /deps
 /*.ez
 
+build.log
+
 # Generated on crash by the VM
 erl_crash.dump
 
